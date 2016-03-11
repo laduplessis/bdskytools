@@ -105,8 +105,31 @@ plotSkylineTraces <- function(skyline_mat, times, traces=1000, col=pal.dark(cgra
 #' 
 #' assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
 #' 
+#' @param type Type of skyline to plot.
+#' 
+#'             "smooth" : If skyline_mat contains the HPDs plot a smooth line and polygon (type='l')
+#'             
+#'             "step"   : If skyline_mat contains the HPDs plot a stepped line and polygon (type='S')
+#'             
+#'             "lines" : Plot every row in the matrix as a smooth line (type='l')
+#'             
+#'             "steplines" : Plot every row in the matrix as a stepped line (type='S')
+#'             
+#' @param traces Number of traces to draw if type="traces"
+#'             
+#' @param new Create a new set of axes (the skyline is fitted to the plotting devie)
+#' 
+#' @param add Add to the current plot (do not create a new plotting device)
+#' 
+#' @param ... Parameters passed to plotting function
+#' 
 #' @export
-plotSkyline <- function(skyline_mat, times, type="", col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), new=TRUE, add=FALSE, ...) {
+plotSkyline <- function(times, skyline_mat, type="smooth", col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), traces=1000,
+                        new=TRUE, add=FALSE, ...) {
+  
+  
+  # Check dimensions
+  if (length(times) != ncol(skyline_mat)) stop("Dimension mismatch between times and skyline_mat!")
   
   # Do not open a new device (add to the current plot)
   if (add == TRUE) par(new=TRUE)
@@ -119,10 +142,42 @@ plotSkyline <- function(skyline_mat, times, type="", col=pal.dark(cblack), fill=
       plot(1, type='n', ylim=ylims, xlim=xlims, ...)
   }
   
-  polygon(c(times, rev(times)), c(skyline_mat[1,], rev(skyline_mat[3,])), col=fill, border=NA)
-  lines(times, skyline_mat[2,], col=col)
+  #######################
+  # Plot actual skyline #
+  #######################
   
-  par(new=FALSE)
+  # Plot traces
+  if (type == "lines" || type == "steplines") {
+      if (traces > 0 && traces < nrow(skyline_mat)) 
+          ind <- sample(nrow(skyline_mat), size=traces, replace=FALSE)
+      else 
+          ind <- 1:nrow(skyline_mat)
+    
+      for (i in 1:length(ind)) {
+        lines(times, skyline_mat[ind[i],], col=col, type=if(type=="lines") 'l' else 'S')
+      }   
+  } else
+  # Plot HPDs smooth
+  if (type == "smooth" && nrow(skyline_mat) == 3) {
+    
+      polygon(c(times, rev(times)), c(skyline_mat[1,], rev(skyline_mat[3,])), col=fill, border=NA)
+      lines(times, skyline_mat[2,], col=col)  
+      
+  } else
+  # Plot HPDs stepped
+  if (type == "step" && nrow(skyline_mat) == 3) {
+    
+      for (i in 2:ncol(skyline_mat)) {
+        rect(times[i-1], skyline_mat[1,i-1], times[i], skyline_mat[3,i-1], col=fill, border=NA)
+      }
+      lines(times, skyline_mat[2,], col=col, type='S')
+      
+  } else
+    stop("Invalid type parameter for Skyline plot!")
+  
+  
+  
+  if (add == TRUE) par(new=FALSE)
 }
 
 

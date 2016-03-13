@@ -40,7 +40,7 @@ pal.light  <- function(col, alpha=1) {
 
 #' Palette of diverging dark colours (Paired palette from RColorBrewer)
 #' 
-#'   @export
+#' @export
 pal.dark  <- function(col, alpha=1) {
   return (paste0(palette.dark[col],format(as.hexmode(round(alpha*255)), width=2)))
 }
@@ -49,3 +49,13 @@ pal.dark  <- function(col, alpha=1) {
 ###############################################################################
 # Plot PDF figures
 
+#' Need to follow with dev.off()
+#' 
+#' @export
+NewFig <- function(figname="fig.pdf", width=3.42, aspectratio=3/2, pointsize=6) {
+  
+  pdf(file=figname, width=width, height=width/aspectratio, pointsize=pointsize, useDingbats=FALSE)
+  
+  # Make figure
+  # dev.off()
+}

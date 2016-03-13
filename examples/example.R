@@ -3,27 +3,32 @@ library(bdskytools)
 fname <- "~/Documents/Projects/Ebola/Data/HCV_OUPrior/HCV_oup_40_127.log"
 
 lf <- readLogfile(fname)
+lf <- readLogfile(fname, maxsamples=10000)
 
 R0_sky <- getSkylineSubset(lf, "R0")
 delta_sky <- getSkylineSubset(lf, "becomeUninfectiousRate")
 
 R0_hpd <- getMatrixHPD(R0_sky)
 
-
 timegrid      <- 1:500
 R0_gridded    <- gridSkyline(R0_sky, lf$orig_root, timegrid)
+R0_gridded_rev<- gridSkyline(R0_sky, lf$orig_root, timegrid, reverse=TRUE)
 delta_gridded <- gridSkyline(delta_sky, lf$orig_root, timegrid)
 
 R0_gridded_hpd    <- getMatrixHPD(R0_gridded)
 delta_gridded_hpd <- getMatrixHPD(delta_gridded)
 
 
-plotSkylinePretty(timegrid, R0_gridded_hpd, axispadding=0.0, ylims=c(0,2), col=pal.dark(corange), fill=pal.dark(corange,0.25), col.axis=pal.dark(corange), xlab="Time", ylab="R0", yline=2, xline=2)
-plotSkylinePretty(timegrid, delta_gridded_hpd, axispadding=0.0, col=pal.dark(cpurple), fill=pal.dark(cpurple,0.25), col.axis=pal.dark(cpurple), xaxis=FALSE, ylab="Delta", side=4, yline=2, add=TRUE)
+NewFig("~/Documents/Projects/BEAST2/bdskytools/examples/Test.pdf")
+plotSkylinePretty(timegrid, R0_gridded_hpd, ylims=c(0,2), col=pal.dark(corange), fill=pal.dark(corange,0.25), col.axis=pal.dark(corange), xlab="Time", ylab="R0", yline=2, xline=2)
+plotSkylinePretty(timegrid, delta_gridded_hpd, axispadding=0.0, ylims=c(0,2), col=pal.dark(cpurple), fill=pal.dark(cpurple,0.25), col.axis=pal.dark(cpurple), xaxis=FALSE, ylab="Delta", side=4, yline=2, add=TRUE)
+dev.off()
 
 
+plotSkyline(timegrid, R0_gridded_rev, type='steplines')
 
 plotSkyline(timegrid, R0_gridded_hpd, type='smooth')
+plotSkyline(timegrid, R0_gridded_hpd2, type='smooth', add=TRUE)
 plotSkyline(timegrid, R0_gridded_hpd, type='step')
 plotSkyline(1:40, R0_hpd, type='steplines')
 

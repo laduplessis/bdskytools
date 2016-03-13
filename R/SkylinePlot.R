@@ -1,56 +1,4 @@
 
-#' Reverses each column (margin=2) or row (margin=1) of a matrix
-revMatrix <- function(data, margin=1) {
-  temp <- apply(data, margin, rev)
-  if (margin == 1)
-    return(t(temp))
-  else 
-    return(temp)
-}
-
-#' Interpolates skyline on a time grid (returns a matrix)
-#' Assumes that generations are rows and skyline variables are columns (in order)
-#' Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
-#' 
-#' @export
-gridSkyline <- function(skyline, origin, times, reverse=FALSE) {
-  
-  n <- ncol(skyline)   # skyline variables (shifts+1)
-  m <- nrow(skyline)   # generations
-  if (length(origin) == 1) origin <- rep(origin,m)
-  if (length(origin) != m) stop("Something wrong with dimensions!")
-  
-  skyline_gridded           <- matrix(0, nrow=m, ncol=length(times))
-  colnames(skyline_gridded) <- times
-  skyline_matrix            <- as.matrix(skyline)
-  
-  for (i in 1:m) {
-    ind    <- pmax(1,n - floor(times / origin[i] * n))
-    skyline_gridded[i,] <- skyline_matrix[i,ind]
-  }
-  
-  return (skyline_gridded)
-}
-
-
-#' Version using apply, but it is slower for some enigmatic reason
-gridSkylineVec <- function(skyline, origin, times, reverse=FALSE) {
-  
-  n <- ncol(skyline)   # skyline variables (shifts+1)
-  m <- nrow(skyline)   # generations
-  if (length(origin) != m) stop("Something wrong with dimensions!")
-  
-  skyline_matrix <- as.matrix(skyline)
-  
-  getRows <- function(skyline_origin, n, times) {
-    ind <- (pmax(1,n - floor(times / skyline_origin[n+1] * n)))
-    return(skyline_origin[ind])
-  }
-  
-  skyline_gridded <- apply(cbind(skyline_matrix, origin), 1, getRows, n, times)
-  
-  return(t(skyline_gridded))
-}
 
 
 #' Get range and pad by some percentage of the range on either side
@@ -183,7 +131,9 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 
 
 
-#' Plot a pretty skyline
+#' Function to plot a prettier skyline with a lot of options.
+#'
+#' When plotting the y-axis on the right need to ensure that the plot margins are big enough!
 #'
 #' @param side Side to draw the y-axis
 #' @param xline Line to draw x-axis label on
@@ -204,15 +154,6 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
   if (is.null(xlims))  xlims  <- range(times)
 
   
-  # x-axis
-  if (xaxis == TRUE) {
-      ypos <- min(ylims, yticks)-axispadding*diff(ylims)
-      axis(1, at=xticks, pos=ypos, lwd=0, lwd.ticks=1, las=1)
-      lines(range(xlims, xticks), rep(ypos,2))
-      mtext(xlab, side=1, line=xline)
-  }  
-  
-  
   # y-axis
   if (yaxis == TRUE) {
       if (side == 2) 
@@ -226,6 +167,15 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
       lines(rep(xpos,2), range(ylims, yticks), col=col.axis)
       mtext(ylab, side=side, line=yline, col=col.axis)
   }
+  
+  
+  # x-axis
+  if (xaxis == TRUE) {
+    ypos <- min(ylims, yticks)-axispadding*diff(ylims)
+    axis(1, at=xticks, pos=ypos, lwd=0, lwd.ticks=1, las=1)
+    lines(range(xlims, xticks), rep(ypos,2))
+    mtext(xlab, side=1, line=xline)
+  }  
 }
 
 

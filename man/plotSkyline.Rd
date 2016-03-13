@@ -2,12 +2,11 @@
 % Please edit documentation in R/SkylinePlot.R
 \name{plotSkyline}
 \alias{plotSkyline}
-\title{new: create a new set of axes
-add: add to the current plot (do not create a new plotting device)}
+\title{Plot a Skyline.}
 \usage{
-plotSkyline(times, skyline_mat, type = "smooth", col = pal.dark(cblack),
-  fill = pal.dark(cgray, 0.25), traces = 1000, new = TRUE, add = FALSE,
-  ...)
+plotSkyline(times, skyline_mat, type = "smooth", traces = 1000,
+  col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), new = TRUE,
+  add = FALSE, xlims = NULL, ylims = NULL, ...)
 }
 \arguments{
 \item{type}{Type of skyline to plot.
@@ -16,7 +15,9 @@ plotSkyline(times, skyline_mat, type = "smooth", col = pal.dark(cblack),
 
             "step"   : If skyline_mat contains the HPDs plot a stepped line and polygon (type='S')
 
-            "traces" : Plot every row in the matrix as a stepped line (type='S')}
+            "lines" : Plot every row in the matrix as a smooth line (type='l')
+
+            "steplines" : Plot every row in the matrix as a stepped line (type='S')}
 
 \item{traces}{Number of traces to draw if type="traces"}
 
@@ -27,6 +28,6 @@ plotSkyline(times, skyline_mat, type = "smooth", col = pal.dark(cblack),
 \item{...}{Parameters passed to plotting function}
 }
 \description{
-assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
+Assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
 }
 

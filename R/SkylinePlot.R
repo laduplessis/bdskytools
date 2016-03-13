@@ -123,8 +123,8 @@ plotSkylineTraces <- function(skyline_mat, times, traces=1000, col=pal.dark(cgra
 #' @param ... Parameters passed to plotting function
 #' 
 #' @export
-plotSkyline <- function(times, skyline_mat, type="smooth", col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), traces=1000,
-                        new=TRUE, add=FALSE, ...) {
+plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), 
+                        new=TRUE, add=FALSE, xlims=NULL, ylims=NULL, ...) {
   
   
   # Check dimensions
@@ -135,8 +135,8 @@ plotSkyline <- function(times, skyline_mat, type="smooth", col=pal.dark(cblack),
   
   # Create a new set of axes that fits this skyline
   if (new == TRUE) {
-      ylims <- paddedrange(skyline_mat)
-      xlims <- range(times)
+      if (is.null(ylims)) ylims <- paddedrange(skyline_mat)
+      if (is.null(xlims)) xlims <- range(times)
       
       plot(1, type='n', ylim=ylims, xlim=xlims, ...)
   }
@@ -181,9 +181,51 @@ plotSkyline <- function(times, skyline_mat, type="smooth", col=pal.dark(cblack),
 
 
 
-plotSkylinePretty <- function(times, skyline_mat, col.axes=-1, xlab="", ylab="", side=1, timelabels=NA, ...) {
+
+
+#' Plot a pretty skyline
+#'
+#' @param side Side to draw the y-axis
+#' @param xline Line to draw x-axis label on
+#' @param yline Line to draw y-axis label on
+#' 
+#' @export
+plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), col.axis=NA,  
+                              xaxis=TRUE, yaxis=TRUE, xlab="", ylab="", xline=1, yline=1, xticks=NULL, yticks=NULL, xlims=NULL, ylims=NULL, axispadding=0, side=2, ...) {
+  
+  # Plot the basic skyline first
+  plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=ylims,  ...)
+
+  
+  # General settings
+  if (is.null(xticks)) xticks <- axTicks(1)
+  if (is.null(yticks)) yticks <- axTicks(2)
+  if (is.null(ylims))  ylims  <- paddedrange(skyline_mat)
+  if (is.null(xlims))  xlims  <- range(times)
+
+  
+  # x-axis
+  if (xaxis == TRUE) {
+      ypos <- min(ylims, yticks)-axispadding*diff(ylims)
+      axis(1, at=xticks, pos=ypos, lwd=0, lwd.ticks=1, las=1)
+      lines(range(xlims, xticks), rep(ypos,2))
+      mtext(xlab, side=1, line=xline)
+  }  
   
   
+  # y-axis
+  if (yaxis == TRUE) {
+      if (side == 2) 
+        xpos <- min(xlims, xticks)-(axispadding*diff(xlims))
+      else
+        xpos <- max(xlims, xticks)+(axispadding*diff(xlims))
+    
+      if (is.na(col.axis)) col.axis <- pal.dark(cblack)
+      
+      axis(side, at=yticks, pos=xpos, lwd=0, lwd.ticks=1, las=1, col=col.axis, col.axis=col.axis)
+      lines(rep(xpos,2), range(ylims, yticks), col=col.axis)
+      mtext(ylab, side=side, line=yline, col=col.axis)
+  }
 }
 
 

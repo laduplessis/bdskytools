@@ -17,7 +17,10 @@ corange <- 4
 cpurple <- 5
 
 #' @export
-cgray   <- cgrey <- 7
+cgray   <- 7
+
+#' @export
+cgrey <- 7
 
 #' @export
 cblack  <- 8

@@ -100,10 +100,9 @@ plotSkylineTraces <- function(skyline_mat, times, traces=1000, col=pal.dark(cgra
 }
 
 
-#' new: create a new set of axes
-#' add: add to the current plot (do not create a new plotting device)
+#' Plot a Skyline.
 #' 
-#' assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
+#' Assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
 #' 
 #' @param type Type of skyline to plot.
 #' 
@@ -178,6 +177,13 @@ plotSkyline <- function(times, skyline_mat, type="smooth", col=pal.dark(cblack),
   
   
   if (add == TRUE) par(new=FALSE)
+}
+
+
+
+plotSkylinePretty <- function(times, skyline_mat, col.axes=-1, xlab="", ylab="", side=1, timelabels=NA, ...) {
+  
+  
 }
 
 

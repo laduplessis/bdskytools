@@ -139,6 +139,10 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 #' @param xline Line to draw x-axis label on
 #' @param yline Line to draw y-axis label on
 #' 
+#' @todo  Text sizes
+#'        Plot dates on x-axis
+#'        Plot tree in background
+#' 
 #' @export
 plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), col.axis=NA,  
                               xaxis=TRUE, yaxis=TRUE, xlab="", ylab="", xline=1, yline=1, xticks=NULL, yticks=NULL, xlims=NULL, ylims=NULL, axispadding=0, side=2, ...) {
@@ -154,6 +158,15 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
   if (is.null(xlims))  xlims  <- range(times)
 
   
+  # x-axis
+  if (xaxis == TRUE) {
+    ypos <- min(ylims, yticks)-axispadding*diff(ylims)
+    axis(1, at=xticks, pos=ypos, lwd=0, lwd.ticks=1, las=1)
+    lines(range(xlims, xticks), rep(ypos,2))
+    mtext(xlab, side=1, line=xline)
+  }  
+  
+  
   # y-axis
   if (yaxis == TRUE) {
       if (side == 2) 
@@ -168,14 +181,6 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
       mtext(ylab, side=side, line=yline, col=col.axis)
   }
   
-  
-  # x-axis
-  if (xaxis == TRUE) {
-    ypos <- min(ylims, yticks)-axispadding*diff(ylims)
-    axis(1, at=xticks, pos=ypos, lwd=0, lwd.ticks=1, las=1)
-    lines(range(xlims, xticks), rep(ypos,2))
-    mtext(xlab, side=1, line=xline)
-  }  
 }
 
 

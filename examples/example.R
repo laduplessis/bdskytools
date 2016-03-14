@@ -2,7 +2,7 @@ library(bdskytools)
 
 fname <- "~/Documents/Projects/Ebola/Data/HCV_OUPrior/HCV_oup_40_127.log"
 
-lf <- readLogfile(fname)
+#lf <- readLogfile(fname)
 lf <- readLogfile(fname, maxsamples=10000)
 
 R0_sky <- getSkylineSubset(lf, "R0")
@@ -10,10 +10,9 @@ delta_sky <- getSkylineSubset(lf, "becomeUninfectiousRate")
 
 R0_hpd <- getMatrixHPD(R0_sky)
 
-timegrid      <- 1:500
-R0_gridded    <- gridSkyline(R0_sky, lf$orig_root, timegrid)
-R0_gridded_rev<- gridSkyline(R0_sky, lf$orig_root, timegrid, reverse=TRUE)
-delta_gridded <- gridSkyline(delta_sky, lf$orig_root, timegrid)
+timegrid       <- 1:500
+R0_gridded     <- gridSkyline(R0_sky, lf$orig_root, timegrid)
+delta_gridded  <- gridSkyline(delta_sky, lf$orig_root, timegrid)
 
 R0_gridded_hpd    <- getMatrixHPD(R0_gridded)
 delta_gridded_hpd <- getMatrixHPD(delta_gridded)
@@ -24,6 +23,7 @@ plotSkylinePretty(timegrid, R0_gridded_hpd, ylims=c(0,2), col=pal.dark(corange),
 plotSkylinePretty(timegrid, delta_gridded_hpd, axispadding=0.0, ylims=c(0,2), col=pal.dark(cpurple), fill=pal.dark(cpurple,0.25), col.axis=pal.dark(cpurple), xaxis=FALSE, ylab="Delta", side=4, yline=2, add=TRUE)
 dev.off()
 
+stop()
 
 plotSkyline(timegrid, R0_gridded_rev, type='steplines')
 

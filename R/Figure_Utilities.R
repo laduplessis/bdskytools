@@ -1,5 +1,5 @@
 ###############################################################################
-# Initialize colour constats and palettes for plotting
+# Initialize colour constants
 
 #' @export
 cblue   <- 1
@@ -27,6 +27,10 @@ cblack  <- 8
 
 #' @export
 cwhite  <- 9
+
+
+###############################################################################
+# Initialize palettes for plotting
 
 palette.dark  <- c(RColorBrewer::brewer.pal(12,"Paired")[seq(2,12,2)], "#777777", "#000000", "#ffffff")
 palette.light <- c(RColorBrewer::brewer.pal(12,"Paired")[seq(1,12,2)], "#dddddd", "#000000", "#ffffff")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/SkylinePlot.R
 \name{plotSkylinePretty}
 \alias{plotSkylinePretty}
-\title{Plot a pretty skyline}
+\title{Plot a pretty skyline. Contains default options for drawing axes to the plot}
 \usage{
 plotSkylinePretty(times, skyline_mat, type = "smooth", traces = 1000,
   col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), col.axis = NA,
@@ -18,6 +18,6 @@ plotSkylinePretty(times, skyline_mat, type = "smooth", traces = 1000,
 \item{side}{Side to draw the y-axis}
 }
 \description{
-Plot a pretty skyline
+When plotting the y-axis on the right need to ensure that the plot margins are big enough!
 }
 

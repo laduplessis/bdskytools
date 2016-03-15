@@ -1,7 +1,15 @@
 
 
+
 #' Simulate OU trajectory using the Euler-Maruyama method (inaccurate)
+#'
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
 #' 
+#' @export
 simulateDiscreteOU <- function(x0, t, mu, sigma, nu) {
   
   dt   <- t[2]-t[1]
@@ -16,6 +24,14 @@ simulateDiscreteOU <- function(x0, t, mu, sigma, nu) {
 
 #' Simulate OU trajectory using the analytical solution obtained
 #' using a scaled time-transformed Wiener process
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
+#' 
+#' @export
 simulateOU <- function(x0, t, mu, sigma, nu) {
   
   n  <- length(t)
@@ -34,6 +50,13 @@ simulateOU <- function(x0, t, mu, sigma, nu) {
 #' using a scaled time-transformed Wiener process
 #' 
 #' Slow unvectorized version
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
+#' 
 simulateOUslow <- function(x0, t, mu, sigma, nu) {
   
   dW   <- rnorm(length(t)-1)
@@ -49,21 +72,42 @@ simulateOUslow <- function(x0, t, mu, sigma, nu) {
 }
 
 
-#' Expected value of OU process at times t starting 
-#' at x0 at time 0
+#' Expected value of OU process at times t starting at x0 at time 0
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
+#' 
+#' @export
 expectedValOU <- function(x0, t, mu, nu) {
   return(mu + (x0-mu)*exp(-nu*t))
 }
 
-#' Standard deviation of OU process at times t starting 
-#' at x0 at time 0
+#' Standard deviation of OU process at times t starting at x0 at time 0
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
+#' 
+#' @export
 standardDevOU <- function(x0, t, mu, sigma, nu) {
   term <- 1 - exp(-2*nu*t)
   return(sqrt((sigma^2/(2*nu))*term))
 }
 
 #' Calculate quantiles of OU process at different timepoints
-#' (assuming x0 is the only information)
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' @param mu Mean
+#' @param sigma Standard deviation
+#' @param nu Decay rate
+#' 
+#' @export
 quantilesOU <- function(p, x0, t, mu, sigma, nu) {
   
   E <- expectedValOU(x0, t, mu, nu)
@@ -75,16 +119,4 @@ quantilesOU <- function(p, x0, t, mu, sigma, nu) {
   }
   
   return(result)
-}
-
-
-plotQuantileGradient <- function(quantiles, col) {
-  
-  n <- nrow(quantiles)
-  col <- pal.dark(col, alpha=0.1+0.5*(1/(n/2))) 
-  
-  for (i in 1:floor(n/2)) {
-    polygon(c(t, rev(t)), c(quantiles[i,], rev(quantiles[n-i+1,])), col=col, border=NA)
-  }
-  
 }

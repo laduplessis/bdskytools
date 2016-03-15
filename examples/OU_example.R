@@ -1,4 +1,4 @@
-#rm(list = ls())
+rm(list = ls())
 library(bdskytools)
 
 
@@ -25,7 +25,7 @@ limits      <- quantilesOU(c(0.025, 0.5, 0.975), x0, t, mu, sigma, nu)
 
 
 plot(1,type="n",xlim=c(0,tn),ylim=c(0,2),axes=TRUE,xlab=NA,ylab=NA)    
-plotQuantileGradient(percentiles, cblue)
+plotQuantileGradient(t, percentiles, cblue)
 for (i in 1:100) {
   x <- simulateOU(x0, t, mu, sigma, nu)
   lines(t, x, col=pal.dark(cgreen,0.25))
@@ -69,3 +69,17 @@ lines(t, getMatrixHPD(upper)[3,], col=pal.light(cred), lty=2)
 lines(t, getMatrixHPD(lower)[1,], col=pal.light(cred), lty=2)
 
 
+##########################
+# Example 3
+
+nu    <- 6
+mu    <- 1
+
+t    <- seq(from=0, to=1, length.out=40)
+
+x0_p    <- getPrior(rexp, 1, rate=1)
+mu_p    <- getPrior(rnorm, 1, mean=1, sd=0.1)
+sigma_p <- getPrior(rlnorm, 1, meanlog=-1, sdlog=1)
+nu_p    <- getPrior(rlnorm, 1, meanlog=-1, sdlog=1)
+
+plotOUProcessPriors(x0_p, t, mu, sigma_p, nu)

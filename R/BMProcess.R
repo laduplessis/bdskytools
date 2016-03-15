@@ -1,3 +1,9 @@
+#' Simulate BM trajectory
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' 
+#' @export
 simulateBM <- function(x0, t, k=1) {
   n  <- length(t)
   dt <- diff(t)
@@ -11,7 +17,12 @@ simulateBM <- function(x0, t, k=1) {
   return(x0+W)
 }
 
-
+#' Calculate quantiles of BM process at different timepoints
+#' 
+#' @param x0 Initial value of the process 
+#' @param t  Vector of time points to evaluate the trajectory at
+#' 
+#' @export
 quantilesBM <- function(p, x0, t) {
   
   E <- x0

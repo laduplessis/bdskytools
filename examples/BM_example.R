@@ -23,7 +23,7 @@ limits      <- quantilesBM(c(0.025, 0.5, 0.975), x0, t)
 x <- simulateBM(x0, t,100)
 
 plot(1,type="n",xlim=c(0,tn),ylim=x0+c(-3,3),axes=TRUE,xlab=NA,ylab=NA)    
-plotQuantileGradient(percentiles, cblue)
+plotQuantileGradient(t, percentiles, cblue)
 for (i in 1:100) {
   lines(t, x[i,], col=pal.dark(corange,0.25))
 }

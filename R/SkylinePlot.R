@@ -74,6 +74,9 @@ plotSkylineTraces <- function(skyline_mat, times, traces=1000, col=pal.dark(cgra
 plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), 
                         new=TRUE, add=FALSE, xlims=NULL, ylims=NULL, ...) {
   
+  ##################
+  # Initialization #
+  ##################
   
   # Check dimensions
   if (length(times) != ncol(skyline_mat)) stop("Dimension mismatch between times and skyline_mat!")
@@ -85,8 +88,13 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
   if (new == TRUE) {
       if (is.null(ylims)) ylims <- paddedrange(skyline_mat)
       if (is.null(xlims)) xlims <- range(times)
-      
+        
+      # Create new plot
       plot(1, type='n', ylim=ylims, xlim=xlims, ...)
+      
+      # Get and set clipping area
+      usr <- par("usr")
+      clip(xlims[1], xlims[2], ylims[1], ylims[2])
   }
   
   #######################
@@ -122,16 +130,19 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
   } else
     stop("Invalid type parameter for Skyline plot!")
   
-  
+  ##################
+  # Reset settings #
+  ##################
   
   if (add == TRUE) par(new=FALSE)
+  if (new == TRUE) do.call("clip", as.list(usr))
 }
 
 
 
 
 
-#' Function to plot a prettier skyline with a lot of options.
+#' Plot a pretty skyline. Contains default options for drawing axes to the plot
 #'
 #' When plotting the y-axis on the right need to ensure that the plot margins are big enough!
 #'
@@ -142,6 +153,8 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 #' @todo  Text sizes
 #'        Plot dates on x-axis
 #'        Plot tree in background
+#'        grid lines (x and y + colour)
+#'        
 #' 
 #' @export
 plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), col.axis=NA,  

@@ -9,7 +9,8 @@ Every generation has the skyline from times[1] to origin[i] (or origin[i] to tim
 gridSkyline(skyline, origin, times, reverse = FALSE)
 }
 \arguments{
-\item{reverse}{If TRUE assumes that skyline[,n] is the oldest, else if FALSE assume skyline[,1] is the oldest}
+\item{reverse}{If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
+else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).}
 }
 \description{
 Interpolates skyline on a time grid (returns a matrix)

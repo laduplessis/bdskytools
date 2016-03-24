@@ -7,7 +7,9 @@
 plotSkylinePretty(times, skyline_mat, type = "smooth", traces = 1000,
   col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), col.axis = NA,
   xaxis = TRUE, yaxis = TRUE, xlab = "", ylab = "", xline = 1,
-  yline = 1, xticks = NULL, yticks = NULL, xlims = NULL, ylims = NULL,
+  yline = 1, xticks = NULL, yticks = NULL, xticklabels = NULL,
+  xlims = NULL, ylims = NULL, xgrid = FALSE, ygrid = FALSE,
+  gridcol = pal.light(cgray), cex.label = 1.4, cex.axis = 1,
   axispadding = 0, side = 2, ...)
 }
 \arguments{

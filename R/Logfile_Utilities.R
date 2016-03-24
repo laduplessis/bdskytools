@@ -54,9 +54,10 @@ getMatrixHPD <- function(datamat, margin=2, alpha=0.05) {
 #' Extract all matching parameters from the logfile
 #' e.g. if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
 #' 
+#' par needs to be at the start of the string
 #' @export
 getSkylineSubset <- function(logfile, par) {
-  return(lf[grepl(par, names(lf))])
+  return(logfile[grepl(paste0('^',par), names(logfile))])
 }
 
 
@@ -78,7 +79,8 @@ readLogfile <- function(filename, burnin=0.1, maxsamples=-1) {
 #' Assumes that generations are rows and skyline variables are columns (in order)
 #' Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
 #' 
-#' @param reverse If TRUE assumes that skyline[,n] is the oldest, else if FALSE assume skyline[,1] is the oldest
+#' @param reverse If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
+#'                else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).
 #' 
 #' @export
 gridSkyline <- function(skyline, origin, times, reverse=FALSE) {

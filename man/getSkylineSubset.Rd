@@ -8,7 +8,6 @@ e.g. if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)}
 getSkylineSubset(logfile, par)
 }
 \description{
-Extract all matching parameters from the logfile
-e.g. if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
+par needs to be at the start of the string
 }
 

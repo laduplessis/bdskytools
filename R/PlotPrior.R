@@ -1,3 +1,53 @@
+#' Plot a prior distribution
+#' 
+#' @param priorfun Family of distributions e.g. norm or beta
+#' @param prior_args List of arguments for priorfun e.g. list(mean=1,sd=0.5)
+#' 
+#' @export
+plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), ylab="Density", xlab="x", 
+                      plotquantile=TRUE, grid=TRUE, positive=TRUE, invert=FALSE, scaling=1) {
+
+  
+  scaleX <- function(x) {
+      if (invert == TRUE)
+          return(scaling/x)
+      else
+          return(scaling*x)
+  }
+  
+  
+  # Get 95% HPD
+  q <- do.call(sprintf("q%s",priorfun), c(list(p=c(0.025, 0.5, 0.975)), prior_args))
+  print(paste("95% quantiles =",paste(q,collapse = ", ")))
+  
+  # Get limits
+  xlims <- paddedrange(q)
+  if (positive == TRUE)
+      xlims[1] <- max(0, xlims[1])
+  x <- seq(xlims[1], xlims[2], length.out=200)
+
+  dfun  <- do.call(sprintf("d%s",priorfun), c(list(x=x), prior_args))
+  ylims <- paddedrange(dfun)
+  ylims[1] <- 0
+    
+  # Plot
+  plot(1,type='n',xlim=sort(scaleX(xlims)), ylim=ylims, las=1, axes=TRUE, ylab=ylab, xlab=xlab)
+
+  if (grid==TRUE) { 
+      for (y in axTicks(2)) 
+        abline(h=y, lty=3, lwd=0.5)
+  }
+  
+  # Draw distribution
+  polygon(scaleX(c(xlims[1], x, xlims[2])), c(ylims[1], dfun, ylims[1]), 
+          col=pal.dark(cblue,0.25), border=NA)
+  lines(scaleX(x), dfun, col=col, lwd=2)
+  
+  # Draw 95% HPD
+  abline(v=scaleX(q), lty=2, lwd=2 ,col=pal.dark(cred))
+}
+
+
 
 #' Return a function with parameters that can be evaluated using eval function
 #' 
@@ -20,7 +70,7 @@ plotQuantileGradient <- function(t, quantiles, colidx) {
   col <- pal.dark(colidx, alpha=0.1+0.5*(1/(n/2)))
   
   for (i in 1:floor(n/2)) {
-      polygon(c(t, rev(t)), c(quantiles[i,], rev(quantiles[n-i+1,])), col=col, border=NA)
+    polygon(c(t, rev(t)), c(quantiles[i,], rev(quantiles[n-i+1,])), col=col, border=NA)
   } 
 }
 

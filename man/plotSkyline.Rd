@@ -9,6 +9,13 @@ plotSkyline(times, skyline_mat, type = "smooth", traces = 1000,
   add = FALSE, xlims = NULL, ylims = NULL, ...)
 }
 \arguments{
+\item{times}{The time points to draw the skyline at. length(times) should be equal to ncol(skyline_mat) + 1.
+(Because there are length(times) intervals and the last interval needs an end-time).
+If length(times) == ncol(skyline_mat) the last interval is arbitrarily given the same length as 
+the second last interval.}
+
+\item{skyline_mat}{}
+
 \item{type}{Type of skyline to plot.
 
             "smooth" : If skyline_mat contains the HPDs plot a smooth line and polygon (type='l')

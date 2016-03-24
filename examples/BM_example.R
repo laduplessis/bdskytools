@@ -62,3 +62,14 @@ lines(t, getMatrixHPD(upper)[3,], col=pal.light(cred), lty=2)
 lines(t, getMatrixHPD(lower)[1,], col=pal.light(cred), lty=2)
 
 
+##########################
+# Example 3
+
+t    <- seq(from=0, to=1, length.out=40)
+
+x0_p    <- getPrior(rexp, 1, rate=1)
+
+NewFig("~/Documents/Projects/BEAST2/bdskytools/examples/BMTest.pdf", width=7)
+plotBMProcessPriors(x0_p, t)
+dev.off()
+

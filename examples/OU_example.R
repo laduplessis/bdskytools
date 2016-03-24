@@ -25,7 +25,7 @@ limits      <- quantilesOU(c(0.025, 0.5, 0.975), x0, t, mu, sigma, nu)
 
 
 plot(1,type="n",xlim=c(0,tn),ylim=c(0,2),axes=TRUE,xlab=NA,ylab=NA)    
-plotQuantileGradient(t, percentiles, cblue)
+plotQuantileGradient(t, percentiles, cpurple)
 for (i in 1:100) {
   x <- simulateOU(x0, t, mu, sigma, nu)
   lines(t, x, col=pal.dark(cgreen,0.25))
@@ -82,4 +82,6 @@ mu_p    <- getPrior(rnorm, 1, mean=1, sd=0.1)
 sigma_p <- getPrior(rlnorm, 1, meanlog=-1, sdlog=1)
 nu_p    <- getPrior(rlnorm, 1, meanlog=-1, sdlog=1)
 
+NewFig("~/Documents/Projects/BEAST2/bdskytools/examples/OUTest.pdf", width=7)
 plotOUProcessPriors(x0_p, t, mu, sigma_p, nu)
+dev.off()

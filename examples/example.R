@@ -19,7 +19,7 @@ delta_gridded_hpd <- getMatrixHPD(delta_gridded)
 
 
 NewFig("~/Documents/Projects/BEAST2/bdskytools/examples/Test.pdf")
-plotSkylinePretty(timegrid, R0_gridded_hpd, ylims=c(0,2), col=pal.dark(corange), fill=pal.dark(corange,0.25), col.axis=pal.dark(corange), xlab="Time", ylab="R0", yline=2, xline=2)
+plotSkylinePretty(timegrid, R0_gridded_hpd, ylims=c(0,2), col=pal.dark(corange), fill=pal.dark(corange,0.25), col.axis=pal.dark(corange), xlab="Time", ylab="R0", yline=2, xline=2, xgrid=TRUE, ygrid=TRUE)
 plotSkylinePretty(timegrid, delta_gridded_hpd, axispadding=0.0, ylims=c(0,2), col=pal.dark(cpurple), fill=pal.dark(cpurple,0.25), col.axis=pal.dark(cpurple), xaxis=FALSE, ylab="Delta", side=4, yline=2, add=TRUE)
 dev.off()
 
@@ -30,7 +30,7 @@ plotSkyline(timegrid, R0_gridded_rev, type='steplines')
 plotSkyline(timegrid, R0_gridded_hpd, type='smooth')
 plotSkyline(timegrid, R0_gridded_hpd2, type='smooth', add=TRUE)
 plotSkyline(timegrid, R0_gridded_hpd, type='step')
-plotSkyline(1:40, R0_hpd, type='steplines')
+plotSkyline(0:39, R0_hpd, type='step')
 
 x <- c(seq(0,10,2), seq(20, 40, 3), 40:66)
 plotSkyline(c(seq(0,10,2), seq(20, 40, 3), 40:66), R0_hpd, type='step')

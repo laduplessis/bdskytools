@@ -3,9 +3,10 @@
 #' @param priorfun Family of distributions e.g. norm or beta
 #' @param prior_args List of arguments for priorfun e.g. list(mean=1,sd=0.5)
 #' 
+#' 
 #' @export
-plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), ylab="Density", xlab="x", 
-                      plotquantile=TRUE, grid=TRUE, positive=TRUE, invert=FALSE, scaling=1) {
+plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), fill=pal.dark(cblue, 0.25), ylab="Density", xlab="x", 
+                      plotquantile=TRUE, grid=TRUE, positive=TRUE, invert=FALSE, scaling=1, add=FALSE, xlims=NULL, ylims=NULL) {
 
   
   scaleX <- function(x) {
@@ -14,24 +15,35 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), y
       else
           return(scaling*x)
   }
-  
+    
   
   # Get 95% HPD
   q <- do.call(sprintf("q%s",priorfun), c(list(p=c(0.025, 0.5, 0.975)), prior_args))
   print(paste("95% quantiles =",paste(q,collapse = ", ")))
   
   # Get limits
-  xlims <- paddedrange(q)
-  if (positive == TRUE)
-      xlims[1] <- max(0, xlims[1])
-  x <- seq(xlims[1], xlims[2], length.out=200)
-
+  if (is.null(xlims)) {
+      xlims <- paddedrange(q)
+      if (positive == TRUE)
+          xlims[1] <- max(0, xlims[1])
+  }
+  
+  x <- seq(xlims[1], xlims[2], length.out=1000)
   dfun  <- do.call(sprintf("d%s",priorfun), c(list(x=x), prior_args))
-  ylims <- paddedrange(dfun)
-  ylims[1] <- 0
+  
+  # Get quantiles as indices on x
+  q_idx <- sapply(q, function(i) { max(which(x <= i)) })
+  
+  
+  if (is.null(ylims)) {
+      ylims <- paddedrange(dfun)
+      ylims[1] <- 0
+  }
     
-  # Plot
-  plot(1,type='n',xlim=sort(scaleX(xlims)), ylim=ylims, las=1, axes=TRUE, ylab=ylab, xlab=xlab)
+  # Plot the prior
+  # Do not open a new device (add to the current plot)
+  if (add == FALSE) 
+      plot(1,type='n',xlim=sort(scaleX(xlims)), ylim=ylims, las=1, axes=TRUE, ylab=ylab, xlab=xlab)
 
   if (grid==TRUE) { 
       for (y in axTicks(2)) 
@@ -39,12 +51,22 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), y
   }
   
   # Draw distribution
-  polygon(scaleX(c(xlims[1], x, xlims[2])), c(ylims[1], dfun, ylims[1]), 
-          col=pal.dark(cblue,0.25), border=NA)
-  lines(scaleX(x), dfun, col=col, lwd=2)
+  polygon(scaleX(c(xlims[1], x[1:q_idx[1]], x[q_idx[1]])), c(ylims[1], dfun[1:q_idx[1]], ylims[1]), 
+          col=pal.dark(cred,0.25), border=NA)
+  lines(scaleX(x[1:q_idx[1]]), dfun[1:q_idx[1]], col=pal.dark(cred), lwd=2)
   
-  # Draw 95% HPD
-  abline(v=scaleX(q), lty=2, lwd=2 ,col=pal.dark(cred))
+  polygon(scaleX(c(x[q_idx[1]], x[q_idx[1]:q_idx[3]], x[q_idx[3]])), c(ylims[1], dfun[q_idx[1]:q_idx[3]], ylims[1]), 
+          col=fill, border=NA)
+  lines(scaleX(x[q_idx[1]:q_idx[3]]), dfun[q_idx[1]:q_idx[3]], col=col, lwd=2)
+  
+  polygon(scaleX(c(x[q_idx[3]], x[q_idx[3]:length(x)], xlims[2])), c(ylims[1], dfun[q_idx[3]:length(dfun)], ylims[1]), 
+          col=pal.dark(cred,0.25), border=NA)
+  lines(scaleX(x[q_idx[3]:length(x)]), dfun[q_idx[3]:length(x)], col=pal.dark(cred), lwd=2)
+  
+  lines(rep(x[q_idx[2]],2), c(ylims[1],dfun[q_idx[2]]), col=col, lwd=2)
+  
+  # Mark 95% HPD
+  # abline(v=scaleX(q), lty=2, lwd=2 ,col=pal.dark(cred))
 }
 
 

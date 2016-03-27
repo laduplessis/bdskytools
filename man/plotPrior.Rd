@@ -5,8 +5,9 @@
 \title{Plot a prior distribution}
 \usage{
 plotPrior(priorfun = "norm", prior_args = list(), col = pal.dark(cblue),
-  ylab = "Density", xlab = "x", plotquantile = TRUE, grid = TRUE,
-  positive = TRUE, invert = FALSE, scaling = 1)
+  fill = pal.dark(cblue, 0.25), ylab = "Density", xlab = "x",
+  plotquantile = TRUE, grid = TRUE, positive = TRUE, invert = FALSE,
+  scaling = 1, add = FALSE, xlims = NULL, ylims = NULL)
 }
 \arguments{
 \item{priorfun}{Family of distributions e.g. norm or beta}

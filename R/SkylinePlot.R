@@ -61,7 +61,11 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
   
   # Create a new set of axes that fits this skyline
   if (new == TRUE) {
-      if (is.null(ylims)) ylims <- paddedrange(skyline_mat)
+      # Always slightly pad the y-limits (even if provided) to plot values at the boundary properly
+      if (is.null(ylims)) 
+          ylims <- paddedrange(skyline_mat)
+      else
+          ylims <- paddedrange(ylims,0.01)
       if (is.null(xlims)) xlims <- range(times)
         
       # Create new plot
@@ -134,12 +138,9 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
                               xaxis=TRUE, yaxis=TRUE, xlab="", ylab="", xline=1, yline=1, xticks=NULL, yticks=NULL, xticklabels=NULL,
                               xlims=NULL, ylims=NULL, xgrid=FALSE, ygrid=FALSE, gridcol=pal.light(cgray),
                               cex.label=1.4, cex.axis=1, axispadding=0, side=2, ...) {
-
-  # slightly pad the y-limits to plot values at 0
-  skyline_ylims <- paddedrange(ylims,0.01)
   
   # Plot the basic skyline first
-  plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, lwd=lwd, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=skyline_ylims,  ...)
+  plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, lwd=lwd, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=ylims,  ...)
 
   
   # General settings

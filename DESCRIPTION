@@ -9,7 +9,8 @@ Description: A package containing several useful R-functions for reading and
     plotting the results of Birth-Death Skyline (BDSKY) runs in BEAST2.
 Imports:
     boa,
-    RColorBrewer
+    RColorBrewer,
+    beanplot
 License: MIT
 LazyData: True
 RoxygenNote: 5.0.1

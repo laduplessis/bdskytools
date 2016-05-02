@@ -39,7 +39,7 @@ palette.light <- c(RColorBrewer::brewer.pal(12,"Paired")[seq(1,12,2)], "#dddddd"
 #' 
 #' @export
 pal.light  <- function(col, alpha=1) {
-  return (paste0(palette.dark[col],format(as.hexmode(round(alpha*255)), width=2)))
+  return (paste0(palette.light[col],format(as.hexmode(round(alpha*255)), width=2)))
 }
 
 #' Palette of diverging dark colours (Paired palette from RColorBrewer)

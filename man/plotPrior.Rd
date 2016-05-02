@@ -7,12 +7,15 @@
 plotPrior(priorfun = "norm", prior_args = list(), col = pal.dark(cblue),
   fill = pal.dark(cblue, 0.25), ylab = "Density", xlab = "x",
   plotquantile = TRUE, grid = TRUE, positive = TRUE, invert = FALSE,
-  scaling = 1, add = FALSE, xlims = NULL, ylims = NULL)
+  meaninrealspace = FALSE, scaling = 1, add = FALSE, xlims = NULL,
+  ylims = NULL, ...)
 }
 \arguments{
 \item{priorfun}{Family of distributions e.g. norm or beta}
 
 \item{prior_args}{List of arguments for priorfun e.g. list(mean=1,sd=0.5)}
+
+\item{meaninrealspace}{Only applies to lognormal distribution}
 }
 \description{
 Plot a prior distribution

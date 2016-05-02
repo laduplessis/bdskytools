@@ -2,11 +2,13 @@
 #' 
 #' @param priorfun Family of distributions e.g. norm or beta
 #' @param prior_args List of arguments for priorfun e.g. list(mean=1,sd=0.5)
+#' @param meaninrealspace Only applies to lognormal distribution
 #' 
 #' 
 #' @export
 plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), fill=pal.dark(cblue, 0.25), ylab="Density", xlab="x", 
-                      plotquantile=TRUE, grid=TRUE, positive=TRUE, invert=FALSE, scaling=1, add=FALSE, xlims=NULL, ylims=NULL) {
+                      plotquantile=TRUE, grid=TRUE, positive=TRUE, invert=FALSE, meaninrealspace=FALSE, scaling=1, 
+                      add=FALSE, xlims=NULL, ylims=NULL, ...) {
 
   
   scaleX <- function(x) {
@@ -15,10 +17,16 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), f
       else
           return(scaling*x)
   }
+  
+  
+  if (meaninrealspace == TRUE && priorfun == "lnorm") {
+      prior_args[[1]] <- log(prior_args[[1]])-0.5*prior_args[[2]]^2
+  }
     
   
   # Get 95% HPD
   q <- do.call(sprintf("q%s",priorfun), c(list(p=c(0.025, 0.5, 0.975)), prior_args))
+  names(q) <- c(0.025, 0.5, 0.975)
   print(paste("95% quantiles =",paste(q,collapse = ", ")))
   
   # Get limits
@@ -39,11 +47,14 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), f
       ylims <- paddedrange(dfun)
       ylims[1] <- 0
   }
+  
+  # Deal with values at Infinity
+  dfun[which(dfun == Inf)] <- ylims[2]*10
     
   # Plot the prior
   # Do not open a new device (add to the current plot)
   if (add == FALSE) 
-      plot(1,type='n',xlim=sort(scaleX(xlims)), ylim=ylims, las=1, axes=TRUE, ylab=ylab, xlab=xlab)
+      plot(1,type='n',xlim=sort(scaleX(xlims)), ylim=ylims, las=1, axes=TRUE, ylab=ylab, xlab=xlab, ...)
 
   if (grid==TRUE) { 
       for (y in axTicks(2)) 
@@ -51,22 +62,25 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), f
   }
   
   # Draw distribution
+  
+  # Left tail
   polygon(scaleX(c(xlims[1], x[1:q_idx[1]], x[q_idx[1]])), c(ylims[1], dfun[1:q_idx[1]], ylims[1]), 
           col=pal.dark(cred,0.25), border=NA)
   lines(scaleX(x[1:q_idx[1]]), dfun[1:q_idx[1]], col=pal.dark(cred), lwd=2)
   
+  # 95%
   polygon(scaleX(c(x[q_idx[1]], x[q_idx[1]:q_idx[3]], x[q_idx[3]])), c(ylims[1], dfun[q_idx[1]:q_idx[3]], ylims[1]), 
           col=fill, border=NA)
   lines(scaleX(x[q_idx[1]:q_idx[3]]), dfun[q_idx[1]:q_idx[3]], col=col, lwd=2)
   
+  # Right tail
   polygon(scaleX(c(x[q_idx[3]], x[q_idx[3]:length(x)], xlims[2])), c(ylims[1], dfun[q_idx[3]:length(dfun)], ylims[1]), 
           col=pal.dark(cred,0.25), border=NA)
   lines(scaleX(x[q_idx[3]:length(x)]), dfun[q_idx[3]:length(x)], col=pal.dark(cred), lwd=2)
   
-  lines(rep(x[q_idx[2]],2), c(ylims[1],dfun[q_idx[2]]), col=col, lwd=2)
-  
-  # Mark 95% HPD
-  # abline(v=scaleX(q), lty=2, lwd=2 ,col=pal.dark(cred))
+  # Draw median
+  #lines(rep(x[q_idx[2]],2), c(ylims[1],dfun[q_idx[2]]), col=col, lwd=2)
+  abline(v=scaleX(q[2]), lty=2, lwd=2 ,col=pal.dark(cred))
 }
 
 

@@ -1,3 +1,19 @@
+###############################################################################
+# Functions for plotting sets of HPDs next to each other
+
+
+#' Plot a rounded bar (jelly bean)
+#'
+#' @param x  x-coordinate of the bar
+#' @param y1 Upper coordinate of the bar
+#' @param y2 Lower coordinate of the bar
+#' @param width Width of the bar
+#' @param nv Number of vertices to use for drawing the circle
+#' @param plotAlways Plot even if the proportions will make it look bad
+#' @param flip Plot horizontally (x is interpreted as y, and y1, y2 as x1, x2)
+#' @param side Plot only half of the bar. (If side = 2 plot the left half, if side = 4 plot the right half)
+#' 
+#'
 plotRoundedBars <- function(x, y1, y2, width, nv=100, plotAlways=FALSE, flip=FALSE, side=NA, ...) {
     
   pin     <- par("pin")
@@ -58,8 +74,9 @@ getBeanHPDs <- function(data) {
 #' Plot jelly beans
 #'
 #'
-#' @param y is a matrix with 5 rows
-#' 
+#' @param data       List with each element being a vector that represents a posterior sample
+#'                   Or a matrix, with each column being a  posterior sample
+#'                    
 #' @export
 plotJellyBeans <- function(data, maxwidth=0.5, hpdonly=FALSE, plotmedian=TRUE, col=pal.dark(cblue), border=NA, side=NA) {
   
@@ -84,7 +101,12 @@ plotJellyBeans <- function(data, maxwidth=0.5, hpdonly=FALSE, plotmedian=TRUE, c
 
 
 
-
+#' Plot beans
+#' 
+#' @param data       List with each element being a vector that represents a posterior sample
+#'                   Or a matrix, with each column being a  posterior sample
+#'                   
+#' @export
 plotBeanPlot <- function(data, hpdlines=c(0.05, 0.5), linewidths=c(0.5,0.75), maxwidth=0.5, hpdonly=TRUE, plotmedian=TRUE, 
                          col=pal.dark(cgray, 0.25), border=pal.dark(black), side, ...) {
   
@@ -103,7 +125,7 @@ plotBeanPlot <- function(data, hpdlines=c(0.05, 0.5), linewidths=c(0.5,0.75), ma
   
   beanplot::beanplot(data, what=c(0,1,0,0), col=col, border=border, add=TRUE, frame.plot=FALSE, axes=FALSE, width=maxwidth, side=beanside, ...)
 
-  # Can be done more efficiently
+  # Plot median
   if (plotmedian == TRUE) {
     width <- 1.25*maxwidth      
     for (i in 1:ncol(data)) {

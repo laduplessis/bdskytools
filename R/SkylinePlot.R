@@ -1,4 +1,5 @@
-
+###############################################################################
+# Functions for plotting birth-death skylines
 
 
 #' Get range and pad by some percentage of the range on either side

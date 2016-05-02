@@ -14,6 +14,9 @@ timer <- function(fun, ...) {
 
 
 #' Reverses each column (margin=2) or row (margin=1) of a matrix
+#' 
+#' @param data The matrix
+#' @param margin Reverse columns (margin=2) or rows (margin=1)
 revMatrix <- function(data, margin=1) {
   temp <- apply(data, margin, rev)
   if (margin == 1)
@@ -78,6 +81,7 @@ readLogfile <- function(filename, burnin=0.1, maxsamples=-1) {
 #' Interpolates skyline on a time grid (returns a matrix)
 #' Assumes that generations are rows and skyline variables are columns (in order)
 #' Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
+#' Assumes that intervals in the skyline are equidistant
 #' 
 #' @param reverse If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
 #'                else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).

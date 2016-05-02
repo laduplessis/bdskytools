@@ -2,7 +2,8 @@
 % Please edit documentation in R/PlotPrior.R
 \name{plotPrior}
 \alias{plotPrior}
-\title{Plot a prior distribution}
+\title{Plot a parametric distribution where the distribution is already available in R
+(for the distribution "xxx" the functions "qxxx()" and "dxxx()" need to be defined and available)}
 \usage{
 plotPrior(priorfun = "norm", prior_args = list(), col = pal.dark(cblue),
   fill = pal.dark(cblue, 0.25), ylab = "Density", xlab = "x",
@@ -18,6 +19,7 @@ plotPrior(priorfun = "norm", prior_args = list(), col = pal.dark(cblue),
 \item{meaninrealspace}{Only applies to lognormal distribution}
 }
 \description{
-Plot a prior distribution
+Plot a parametric distribution where the distribution is already available in R
+(for the distribution "xxx" the functions "qxxx()" and "dxxx()" need to be defined and available)
 }
 

@@ -6,6 +6,11 @@
 \usage{
 revMatrix(data, margin = 1)
 }
+\arguments{
+\item{data}{The matrix}
+
+\item{margin}{Reverse columns (margin=2) or rows (margin=1)}
+}
 \description{
 Reverses each column (margin=2) or row (margin=1) of a matrix
 }

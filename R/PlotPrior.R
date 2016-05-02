@@ -1,8 +1,14 @@
-#' Plot a prior distribution
+###############################################################################
+# Functions for plotting prior distributions (also OU priors)
+
+
+#' Plot a parametric distribution where the distribution is already available in R
+#' (for the distribution "xxx" the functions "qxxx()" and "dxxx()" need to be defined and available)
 #' 
 #' @param priorfun Family of distributions e.g. norm or beta
 #' @param prior_args List of arguments for priorfun e.g. list(mean=1,sd=0.5)
 #' @param meaninrealspace Only applies to lognormal distribution
+#' 
 #' 
 #' 
 #' @export

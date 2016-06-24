@@ -13,7 +13,7 @@
 #' @param flip Plot horizontally (x is interpreted as y, and y1, y2 as x1, x2)
 #' @param side Plot only half of the bar. (If side = 2 plot the left half, if side = 4 plot the right half)
 #' 
-#'
+#' @export
 plotRoundedBars <- function(x, y1, y2, width, nv=100, plotAlways=FALSE, flip=FALSE, side=NA, ...) {
     
   pin     <- par("pin")
@@ -71,14 +71,40 @@ getBeanHPDs <- function(data) {
   return(y)
 }
 
+
 #' Plot jelly beans
+#'
+#'
+#' @param x locations to plot jellybeans
+#' @param y matrix with 5 rows and n columns
+#'                    
+#' @export
+plotJellyBeans <- function(x, y, maxwidth=0.5, plotmedian=TRUE, plotinterquartile=TRUE, col=pal.dark(cblue), border=NA, side=NA) {
+  
+  y <- as.matrix(y)
+  
+  plotRoundedBars(x, y[1,], y[5,], width=0.5*maxwidth, col=col, border=border, side=side)
+  
+  if (plotinterquartile == TRUE) {
+    plotRoundedBars(x, y[2,], y[4,], width=maxwidth, col=col, border=border, side=side)
+  }
+  
+  if (plotmedian == TRUE) { 
+    midwidth <- min(y[3,]-y[1,], y[5,]-y[3,], diff(par("usr"))[3]*0.025) 
+    plotRoundedBars(y[3,], x-0.75*maxwidth, x+0.75*maxwidth, width=midwidth, col=pal.dark(cwhite), border=border, flip=TRUE, plotAlways=TRUE, side=side)  
+    plotRoundedBars(y[3,], x-0.375*maxwidth, x+0.375*maxwidth, width=midwidth/3, col=col, border=border, flip=TRUE, plotAlways=TRUE, side=side)    
+  }
+}
+
+
+#' Get HPDs and plot jelly beans
 #'
 #'
 #' @param data       List with each element being a vector that represents a posterior sample
 #'                   Or a matrix, with each column being a  posterior sample
 #'                    
 #' @export
-plotJellyBeans <- function(data, maxwidth=0.5, hpdonly=FALSE, plotmedian=TRUE, col=pal.dark(cblue), border=NA, side=NA) {
+plotJellyBeanHPDs <- function(data, maxwidth=0.5, hpdonly=FALSE, plotmedian=TRUE, plotinterquartile=TRUE, col=pal.dark(cblue), border=NA, side=NA) {
   
   x <- 1:ncol(data)
   y <- getBeanHPDs(data)
@@ -88,14 +114,7 @@ plotJellyBeans <- function(data, maxwidth=0.5, hpdonly=FALSE, plotmedian=TRUE, c
       segments(1:ncol(data), datarange[1,], 1:ncol(data), datarange[2,], col=border)
   }
   
-  plotRoundedBars(x, y[1,], y[5,], width=0.5*maxwidth, col=col, border=border, side=side)
-  plotRoundedBars(x, y[2,], y[4,], width=maxwidth, col=col, border=border, side=side)
-  
-  if (plotmedian == TRUE) { 
-      midwidth <- min(y[3,]-y[1,], y[5,]-y[3,], diff(par("usr"))[3]*0.025) 
-      plotRoundedBars(y[3,], x-0.75*maxwidth, x+0.75*maxwidth, width=midwidth, col=pal.dark(cwhite), border=border, flip=TRUE, plotAlways=TRUE, side=side)  
-      plotRoundedBars(y[3,], x-0.375*maxwidth, x+0.375*maxwidth, width=midwidth/3, col=col, border=border, flip=TRUE, plotAlways=TRUE, side=side)    
-  }
+  plotJellyBeans(x,y, maxwidth=maxwidth, plotmedian=plotmedian, plotinterquartile=plotinterquartile, col=col, border=border, side=side)
 }
 
 
@@ -179,7 +198,7 @@ plotHPDs <- function(data, type='beans', hpdlines=c(0.05, 0.5), linewidths=c(0.7
     if (new == TRUE) {      
         if (is.null(ylims)) ylims <- paddedrange(data)
       
-        plot(1,type="n",xlim=xlims,ylim=ylims, axes=FALSE, ylab=NA, xlab=NA, log='y')                     
+        plot(1,type="n",xlim=xlims,ylim=ylims, axes=FALSE, ylab=NA, xlab=NA)                     
     } else {
         if (is.null(ylims)) ylims <- range(axTicks(2))      
     }
@@ -194,7 +213,7 @@ plotHPDs <- function(data, type='beans', hpdlines=c(0.05, 0.5), linewidths=c(0.7
     #########################
     
     if (type == "jellybeans")
-        plotJellyBeans(data, hpdonly=hpdonly, plotmedian=plotmedian, col=fill, maxwidth=maxwidth, border=col, side=if (plothalf) side else NA)
+        plotJellyBeanHPDs(data, hpdonly=hpdonly, plotmedian=plotmedian, plotinterquartile=0.5 %in% hpdlines, col=fill, maxwidth=maxwidth, border=col, side=if (plothalf) side else NA)
     else 
     if (type == "beans")
         plotBeanPlot(data, hpdlines=hpdlines, linewidths=linewidths, maxwidth=maxwidth, hpdonly=hpdonly, plotMedian=plotMedian, 

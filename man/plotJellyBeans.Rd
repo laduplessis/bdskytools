@@ -4,12 +4,14 @@
 \alias{plotJellyBeans}
 \title{Plot jelly beans}
 \usage{
-plotJellyBeans(data, maxwidth = 0.5, hpdonly = FALSE, plotmedian = TRUE,
-  col = pal.dark(cblue), border = NA, side = NA)
+plotJellyBeans(x, y, maxwidth = 0.5, plotmedian = TRUE,
+  plotinterquartile = TRUE, col = pal.dark(cblue), border = NA,
+  side = NA)
 }
 \arguments{
-\item{data}{List with each element being a vector that represents a posterior sample
-Or a matrix, with each column being a  posterior sample}
+\item{x}{locations to plot jellybeans}
+
+\item{y}{matrix with 5 rows and n columns}
 }
 \description{
 Plot jelly beans

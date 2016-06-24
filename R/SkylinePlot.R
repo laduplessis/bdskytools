@@ -40,7 +40,7 @@ paddedrange <- function(y, pad=0.1) {
 #' @param ... Parameters passed to plotting function
 #' 
 #' @export
-plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), lwd=1,
+plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), lwd=1, lty=1,
                         new=TRUE, add=FALSE, xlims=NULL, ylims=NULL, ...) {
   
   ##################
@@ -89,14 +89,14 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
           ind <- 1:nrow(skyline_mat)
     
       for (i in 1:length(ind)) {
-        lines(times, skyline_mat[ind[i],], col=col, lwd=lwd, type=if(type=="lines") 'l' else 's')
+        lines(times, skyline_mat[ind[i],], col=col, lwd=lwd, lty=lty, type=if(type=="lines") 'l' else 's')
       }   
   } else
   # Plot HPDs smooth
   if (type == "smooth" && nrow(skyline_mat) == 3) {
     
       polygon(c(times, rev(times)), c(skyline_mat[1,], rev(skyline_mat[3,])), col=fill, border=NA)
-      lines(times, skyline_mat[2,], col=col, lwd=lwd)  
+      lines(times, skyline_mat[2,], col=col, lwd=lwd, lty=lty)  
       
   } else
   # Plot HPDs stepped
@@ -105,7 +105,7 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
       for (i in 2:(intervals+1)) {
         rect(times[i-1], skyline_mat[1,i-1], times[i], skyline_mat[3,i-1], col=fill, border=NA)
       }
-      lines(times, skyline_mat[2,], col=col, lwd=lwd, type='s')
+      lines(times, skyline_mat[2,], col=col, lwd=lwd, lty=lty, type='s')
       
   } else
     stop("Invalid type parameter for Skyline plot!")
@@ -135,13 +135,13 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 #'        
 #' 
 #' @export
-plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), col.axis=NA, lwd=1,
+plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.dark(cblack), fill=pal.dark(cgray, 0.25), col.axis=NA, lwd=1, lty=1,
                               xaxis=TRUE, yaxis=TRUE, xlab="", ylab="", xline=1, yline=1, xticks=NULL, yticks=NULL, xticklabels=NULL,
                               xlims=NULL, ylims=NULL, xgrid=FALSE, ygrid=FALSE, gridcol=pal.light(cgray),
                               cex.label=1.4, cex.axis=1, axispadding=0, side=2, ...) {
   
   # Plot the basic skyline first
-  plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, lwd=lwd, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=ylims,  ...)
+  plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, lwd=lwd, lty=lty, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=ylims,  ...)
 
   
   # General settings

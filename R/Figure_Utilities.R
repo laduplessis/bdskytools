@@ -63,3 +63,30 @@ NewFig <- function(figname="fig.pdf", width=3.42, aspectratio=3/2, pointsize=6) 
   # Make figure
   # dev.off()
 }
+
+
+#' Label plot in top left corner
+#' 
+#' @export
+labelPlot <- function(label, cex=1) {
+  
+  mfrow <- par("mfrow")
+  scale <- mfrow[2]
+  
+  mar   <- par("mar")
+  fin   <- par("fin")
+  mai   <- par("mai")
+  
+  plotheight <- (fin[2]/scale)
+  #plotheight <- par("pin")[2]
+  textheight <- strheight(label, cex=1, units="inches")
+  
+  lines <- (plotheight/textheight)-2
+  
+  #print(paste(plotheight, textheight, lines, par("lheight")))
+  
+  mtext(label, 2, adj=0, las=1, padj=-(lines/2), line=mar[2], cex=cex)
+  
+  #for (i in -20:20)
+  #  mtext(i, 2, adj=0, las=1, padj=i, line=2, cex=1.5)
+}

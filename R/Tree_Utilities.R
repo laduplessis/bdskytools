@@ -1,4 +1,5 @@
 #' Calculate the branching times and leaf heights of a tree
+#' DOESN'T SEEM TO WORK...
 #' Branching events labelled by a 1, leaves (sampling/death) by a 0
 #' 
 #' (based on getx() function by Tanja Stadler)

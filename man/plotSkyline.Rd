@@ -6,7 +6,7 @@
 \usage{
 plotSkyline(times, skyline_mat, type = "smooth", traces = 1000,
   col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), lwd = 1,
-  new = TRUE, add = FALSE, xlims = NULL, ylims = NULL, ...)
+  lty = 1, new = TRUE, add = FALSE, xlims = NULL, ylims = NULL, ...)
 }
 \arguments{
 \item{times}{The time points to draw the skyline at. length(times) should be equal to ncol(skyline_mat) + 1.

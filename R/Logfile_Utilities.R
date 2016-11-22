@@ -132,3 +132,48 @@ gridSkylineVec <- function(skyline, origin, times, reverse=FALSE) {
   return(t(skyline_gridded))
 }
 
+
+#' Grid the skyline between from and to
+#' 
+#' enddate, from and to should all be date objects or in the format "yyyy-mm-dd"
+#' 
+#' Assumes dates in BEAST are in years
+#' 
+#' @param skyline:
+#' @param origin:
+#' @param enddate: End date of the skyline (most recent sample in the tree)
+#' @param from: Start of gridded skyline
+#' @param to:   End of gridded skyline
+#' @param intervals: Number of intervals between from and to, or 'weeks' or 'months'
+#' 
+#' @export
+gridSkylineDates <- function(skyline, origin, enddate, from, to=NA, intervals='weeks', reverse=FALSE) {
+  
+  # 'to' not specified, go to last date in skyline
+  if (is.na(to))
+    to <- enddate
+  
+  # Get sequence of dates to grid to
+  if (intervals == 'weeks') 
+    dates <- getWeeks(start=as.Date(from), end=as.Date(to), inclusive=FALSE)
+  else
+    if (intervals == 'months')
+      dates <- getMonths(start=as.Date(from), end=as.Date(to))
+    else
+      dates <- seq(from=as.Date(from),to=as.Date(to), length.out=(intervals+1))
+    
+    # Convert to years before enddate (present)
+    timegrid <- getYearDate(enddate) - getYearDate(dates)
+    
+    #if (reverse == FALSE)
+    #    timegrid <- rev(timegrid)
+    
+    # Grid skyline
+    skyline_gridded <- gridSkyline(skyline, origin, timegrid, reverse=reverse)
+    #colnames(skyline_gridded) <- dates
+    
+    return(list(dates=dates, skyline=skyline_gridded))
+    #return(skyline_gridded)
+}
+
+

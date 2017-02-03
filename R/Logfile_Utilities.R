@@ -2,7 +2,7 @@
 # Utilities for reading BEAST2 logfiles and getting HPDs
 
 #' Wrapper for timing a function
-#' (probably not accurate)
+#' (probably not very accurate)
 #' 
 #' @export
 timer <- function(fun, ...) {
@@ -83,6 +83,9 @@ readLogfile <- function(filename, burnin=0.1, maxsamples=-1) {
 #' Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
 #' Assumes that intervals in the skyline are equidistant
 #' 
+#' @param skyline The skyline matrix (rows = mcmc generations, columns = skyline variables)
+#' @param origin  The origin of the skyline, for each row in the skyline
+#' @param times   The regular timegrid to return the marginal posterior on
 #' @param reverse If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
 #'                else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).
 #' 
@@ -133,17 +136,16 @@ gridSkylineVec <- function(skyline, origin, times, reverse=FALSE) {
 }
 
 
-#' Grid the skyline between from and to
+#' Grid the skyline between two dates
 #' 
-#' enddate, from and to should all be date objects or in the format "yyyy-mm-dd"
+#' This function makes the assumption that the dates in BEAST are in units of years.
+#' enddate, from and to should all be date objects or Strings in the format "yyyy-mm-dd"
 #' 
-#' Assumes dates in BEAST are in years
-#' 
-#' @param skyline:
-#' @param origin:
-#' @param enddate: End date of the skyline (most recent sample in the tree)
-#' @param from: Start of gridded skyline
-#' @param to:   End of gridded skyline
+#' @param skyline The skyline matrix (rows = mcmc generations, columns = skyline variables)
+#' @param origin  The origin of the skyline, for each row in the skyline
+#' @param enddate End date of the skyline (most recent sample in the tree).
+#' @param from    Start of gridded skyline
+#' @param to      End of gridded skyline
 #' @param intervals: Number of intervals between from and to, or 'weeks' or 'months'
 #' 
 #' @export

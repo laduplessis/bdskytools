@@ -130,6 +130,8 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 #' @param xline Line to draw x-axis label on
 #' @param yline Line to draw y-axis label on
 #' 
+#' See plotSkyline help for documentation on other parameters.
+#' 
 #' @todo  Plot dates on x-axis
 #'        Plot tree in background
 #'        

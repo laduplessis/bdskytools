@@ -3,13 +3,12 @@
 
 
 #' Plot a parametric distribution where the distribution is already available in R
-#' (for the distribution "xxx" the functions "qxxx()" and "dxxx()" need to be defined and available)
+#' 
+#' For the distribution "xxx" the functions "qxxx()" and "dxxx()" need to be defined and available
 #' 
 #' @param priorfun Family of distributions e.g. norm or beta
 #' @param prior_args List of arguments for priorfun e.g. list(mean=1,sd=0.5)
 #' @param meaninrealspace Only applies to lognormal distribution
-#' 
-#' 
 #' 
 #' @export
 plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), fill=pal.dark(cblue, 0.25), ylab="Density", xlab="x", 
@@ -155,6 +154,7 @@ plotOUProcessPriors <- function(x0_prior, t, mu_prior, sigma_prior, nu_prior, ..
 
 
 #' Parameters may be a prior or a constant
+#' 
 #' Use getPrior to quote the prior function to be passed with parameters
 #' 
 #' 

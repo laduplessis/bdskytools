@@ -2,6 +2,7 @@
 # Utilities for reading BEAST2 logfiles and getting HPDs
 
 #' Wrapper for timing a function
+#' 
 #' (probably not very accurate)
 #' 
 #' @export
@@ -27,6 +28,7 @@ revMatrix <- function(data, margin=1) {
 
 
 #' Get HPD of a posterior sample
+#' 
 #' Uses Chen and Shao algorithm as implemented in boa package.
 #' 
 #' @param data The samples from the posterior.
@@ -42,6 +44,7 @@ getHPD <- function(data, alpha=0.05) {
 
 
 #' Get HPD of a matrix of values e.g. a skyline
+#' 
 #' Uses Chen and Shao algorithm as implemented in boa package.
 #'  
 #' @param data The samples from the posterior. Assumes by default that each row represents a posterior sample and each column a parameter (interval).
@@ -55,7 +58,8 @@ getMatrixHPD <- function(datamat, margin=2, alpha=0.05) {
 
 
 #' Extract all matching parameters from the logfile
-#' e.g. if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
+#' 
+#' if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
 #' 
 #' par needs to be at the start of the string
 #' @export
@@ -79,6 +83,7 @@ readLogfile <- function(filename, burnin=0.1, maxsamples=-1) {
 
 
 #' Interpolates skyline on a time grid (returns a matrix)
+#' 
 #' Assumes that generations are rows and skyline variables are columns (in order)
 #' Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
 #' Assumes that intervals in the skyline are equidistant
@@ -146,7 +151,7 @@ gridSkylineVec <- function(skyline, origin, times, reverse=FALSE) {
 #' @param enddate End date of the skyline (most recent sample in the tree).
 #' @param from    Start of gridded skyline
 #' @param to      End of gridded skyline
-#' @param intervals: Number of intervals between from and to, or 'weeks' or 'months'
+#' @param intervals Number of intervals between from and to, or 'weeks' or 'months'
 #' 
 #' @export
 gridSkylineDates <- function(skyline, origin, enddate, from, to=NA, intervals='weeks', reverse=FALSE) {

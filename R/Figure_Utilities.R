@@ -67,6 +67,8 @@ NewFig <- function(figname="fig.pdf", width=3.42, aspectratio=3/2, pointsize=6) 
 
 #' Label plot in top left corner
 #' 
+#' buggy
+#' 
 #' @export
 labelPlot <- function(label, cex=1) {
   

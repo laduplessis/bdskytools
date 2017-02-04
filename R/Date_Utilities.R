@@ -2,6 +2,7 @@
 dateorigin <- "1970-01-01"
 
 #' Convert date from year + fraction to normal date (day, month year)
+#' 
 #' Does not work for years with no decimal (should be December 31 of the previous year)
 #' 
 #' @export
@@ -29,7 +30,9 @@ getYearDate <- function(date) {
 }
 
 #' From the first week BEFORE start up to end (strict)
+#' 
 #' Weeks start on Sunday
+#' 
 #' @param strictend: If TRUE the last value is end, if FALSE it is the first week after end.
 #' @param inclusive: If TRUE then the weeks start and end m
 #' 
@@ -55,6 +58,7 @@ getWeeks <- function(start, end, inclusive=TRUE, strictend=FALSE) {
 
 
 #' Return start and end date, with all months in between
+#' 
 #' From start to end, breaking at the 1st of every month in-between
 #' 
 #' @export

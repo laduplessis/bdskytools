@@ -125,12 +125,11 @@ plotSkyline <- function(times, skyline_mat, type="smooth", traces=1000, col=pal.
 #' Plot a pretty skyline. Contains default options for drawing axes to the plot
 #'
 #' When plotting the y-axis on the right need to ensure that the plot margins are big enough!
+#' See plotSkyline help for documentation on other parameters!
 #'
 #' @param side Side to draw the y-axis
 #' @param xline Line to draw x-axis label on
 #' @param yline Line to draw y-axis label on
-#' 
-#' See plotSkyline help for documentation on other parameters.
 #' 
 #' @todo  Plot dates on x-axis
 #'        Plot tree in background

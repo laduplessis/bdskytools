@@ -1,5 +1,6 @@
 #rm(list = ls())
 library(TreeSim)
+library(bdskytools)
 
 plotTreeTimes <- function(tree, height, times, col) {
   
@@ -47,4 +48,4 @@ treemixed <- sim.bdsky.stt(n=0, lambdasky=c(2,1,2), deathsky=c(1,0.5,1.5), times
 
 times <- getTreeIntervals(treemixed[[1]])
 plotTreeTimes(treemixed[[1]], 5, times[which(times[,2] == 1),1], pal.dark(cblue))
-plotTreeTimes(treemixed[[1]], 5, times[which(times[,2] == ),1], pal.dark(cred))
+plotTreeTimes(treemixed[[1]], 5, times[which(times[,2] == 0),1], pal.dark(cred))

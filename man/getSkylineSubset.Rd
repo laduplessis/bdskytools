@@ -2,12 +2,14 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{getSkylineSubset}
 \alias{getSkylineSubset}
-\title{Extract all matching parameters from the logfile
-e.g. if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)}
+\title{Extract all matching parameters from the logfile}
 \usage{
 getSkylineSubset(logfile, par)
 }
 \description{
+if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
+}
+\details{
 par needs to be at the start of the string
 }
 

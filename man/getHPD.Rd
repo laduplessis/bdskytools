@@ -2,8 +2,7 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{getHPD}
 \alias{getHPD}
-\title{Get HPD of a posterior sample
-Uses Chen and Shao algorithm as implemented in boa package.}
+\title{Get HPD of a posterior sample}
 \usage{
 getHPD(data, alpha = 0.05)
 }
@@ -16,7 +15,6 @@ getHPD(data, alpha = 0.05)
 c(lower, median, upper)
 }
 \description{
-Get HPD of a posterior sample
 Uses Chen and Shao algorithm as implemented in boa package.
 }
 

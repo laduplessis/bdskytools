@@ -2,8 +2,7 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{getMatrixHPD}
 \alias{getMatrixHPD}
-\title{Get HPD of a matrix of values e.g. a skyline
-Uses Chen and Shao algorithm as implemented in boa package.}
+\title{Get HPD of a matrix of values e.g. a skyline}
 \usage{
 getMatrixHPD(datamat, margin = 2, alpha = 0.05)
 }
@@ -16,7 +15,6 @@ getMatrixHPD(datamat, margin = 2, alpha = 0.05)
 3xn matrix where each column is c(lower, median, upper)
 }
 \description{
-Get HPD of a matrix of values e.g. a skyline
 Uses Chen and Shao algorithm as implemented in boa package.
 }
 

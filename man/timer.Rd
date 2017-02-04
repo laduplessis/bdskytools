@@ -2,13 +2,11 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{timer}
 \alias{timer}
-\title{Wrapper for timing a function
-(probably not accurate)}
+\title{Wrapper for timing a function}
 \usage{
 timer(fun, ...)
 }
 \description{
-Wrapper for timing a function
-(probably not accurate)
+(probably not very accurate)
 }
 

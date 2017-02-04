@@ -2,24 +2,26 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{gridSkylineDates}
 \alias{gridSkylineDates}
-\title{Grid the skyline between from and to}
+\title{Grid the skyline between two dates}
 \usage{
 gridSkylineDates(skyline, origin, enddate, from, to = NA,
   intervals = "weeks", reverse = FALSE)
 }
 \arguments{
-\item{enddate:}{End date of the skyline (most recent sample in the tree)}
+\item{skyline}{The skyline matrix (rows = mcmc generations, columns = skyline variables)}
 
-\item{from:}{Start of gridded skyline}
+\item{origin}{The origin of the skyline, for each row in the skyline}
 
-\item{to:}{End of gridded skyline}
+\item{enddate}{End date of the skyline (most recent sample in the tree).}
 
-\item{intervals:}{Number of intervals between from and to, or 'weeks' or 'months'}
+\item{from}{Start of gridded skyline}
+
+\item{to}{End of gridded skyline}
+
+\item{intervals}{Number of intervals between from and to, or 'weeks' or 'months'}
 }
 \description{
-enddate, from and to should all be date objects or in the format "yyyy-mm-dd"
-}
-\details{
-Assumes dates in BEAST are in years
+This function makes the assumption that the dates in BEAST are in units of years.
+enddate, from and to should all be date objects or Strings in the format "yyyy-mm-dd"
 }
 

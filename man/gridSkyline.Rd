@@ -2,19 +2,21 @@
 % Please edit documentation in R/Logfile_Utilities.R
 \name{gridSkyline}
 \alias{gridSkyline}
-\title{Interpolates skyline on a time grid (returns a matrix)
-Assumes that generations are rows and skyline variables are columns (in order)
-Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
-Assumes that intervals in the skyline are equidistant}
+\title{Interpolates skyline on a time grid (returns a matrix)}
 \usage{
 gridSkyline(skyline, origin, times, reverse = FALSE)
 }
 \arguments{
+\item{skyline}{The skyline matrix (rows = mcmc generations, columns = skyline variables)}
+
+\item{origin}{The origin of the skyline, for each row in the skyline}
+
+\item{times}{The regular timegrid to return the marginal posterior on}
+
 \item{reverse}{If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
 else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).}
 }
 \description{
-Interpolates skyline on a time grid (returns a matrix)
 Assumes that generations are rows and skyline variables are columns (in order)
 Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
 Assumes that intervals in the skyline are equidistant

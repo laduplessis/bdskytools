@@ -2,9 +2,7 @@
 % Please edit documentation in R/Tree_Utilities.R
 \name{getTreeIntervals}
 \alias{getTreeIntervals}
-\title{Calculate the branching times and leaf heights of a tree
-DOESN'T SEEM TO WORK...
-Branching events labelled by a 1, leaves (sampling/death) by a 0}
+\title{Calculate the branching times and leaf heights of a tree}
 \usage{
 getTreeIntervals(tree, reverse = FALSE, includeRoot = TRUE)
 }
@@ -16,6 +14,10 @@ getTreeIntervals(tree, reverse = FALSE, includeRoot = TRUE)
 \item{includeRoot}{If true include the root in the time estimation (only has an effect if reverseTime is false) (default=TRUE)}
 }
 \description{
+DOESN'T SEEM TO WORK...
+Branching events labelled by a 1, leaves (sampling/death) by a 0
+}
+\details{
 (based on getx() function by Tanja Stadler)
 }
 

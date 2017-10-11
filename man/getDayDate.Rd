@@ -2,13 +2,10 @@
 % Please edit documentation in R/Date_Utilities.R
 \name{getDayDate}
 \alias{getDayDate}
-\title{Convert date from year + fraction to normal date (day, month year)
-Does not work for years with no decimal (should be December 31 of the previous year)}
+\title{Convert date from year + fraction to normal date (day, month year)}
 \usage{
 getDayDate(date)
 }
 \description{
-Convert date from year + fraction to normal date (day, month year)
 Does not work for years with no decimal (should be December 31 of the previous year)
 }
-

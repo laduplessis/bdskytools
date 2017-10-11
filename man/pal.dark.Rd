@@ -9,4 +9,3 @@ pal.dark(col, alpha = 1)
 \description{
 Palette of diverging dark colours (Paired palette from RColorBrewer)
 }
-

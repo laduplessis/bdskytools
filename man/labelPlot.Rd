@@ -7,6 +7,5 @@
 labelPlot(label, cex = 1)
 }
 \description{
-Label plot in top left corner
+buggy
 }
-

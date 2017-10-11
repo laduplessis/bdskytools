@@ -20,4 +20,3 @@ simulateDiscreteOU(x0, t, mu, sigma, nu)
 \description{
 Simulate OU trajectory using the Euler-Maruyama method (inaccurate)
 }
-

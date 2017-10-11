@@ -24,4 +24,3 @@ gridSkylineDates(skyline, origin, enddate, from, to = NA,
 This function makes the assumption that the dates in BEAST are in units of years.
 enddate, from and to should all be date objects or Strings in the format "yyyy-mm-dd"
 }
-

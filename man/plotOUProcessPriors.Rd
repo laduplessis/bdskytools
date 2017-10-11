@@ -10,4 +10,3 @@ plotOUProcessPriors(x0_prior, t, mu_prior, sigma_prior, nu_prior, ...)
 \description{
 Should probably rewrite this using do.call()
 }
-

@@ -9,4 +9,3 @@ getYearDate(date)
 \description{
 Convert from date to decimal fraction of year
 }
-

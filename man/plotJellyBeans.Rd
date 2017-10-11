@@ -16,4 +16,3 @@ plotJellyBeans(x, y, maxwidth = 0.5, plotmedian = TRUE,
 \description{
 Plot jelly beans
 }
-

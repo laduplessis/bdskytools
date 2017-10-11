@@ -22,4 +22,3 @@ simulateOU(x0, t, mu, sigma, nu)
 Simulate OU trajectory using the analytical solution obtained
 using a scaled time-transformed Wiener process
 }
-

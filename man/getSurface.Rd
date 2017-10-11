@@ -9,4 +9,3 @@ getSurface(xpar, ypar, lk, crop = TRUE)
 \description{
 Does not assume par1 and par2 are ordered (so the code is not very efficient)
 }
-

@@ -2,13 +2,10 @@
 % Please edit documentation in R/PlotPrior.R
 \name{plotBMProcessPriors}
 \alias{plotBMProcessPriors}
-\title{Parameters may be a prior or a constant
-Use getPrior to quote the prior function to be passed with parameters}
+\title{Parameters may be a prior or a constant}
 \usage{
 plotBMProcessPriors(x0_prior, t, ...)
 }
 \description{
-Parameters may be a prior or a constant
 Use getPrior to quote the prior function to be passed with parameters
 }
-

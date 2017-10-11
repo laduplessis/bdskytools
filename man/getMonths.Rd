@@ -2,13 +2,10 @@
 % Please edit documentation in R/Date_Utilities.R
 \name{getMonths}
 \alias{getMonths}
-\title{Return start and end date, with all months in between
-From start to end, breaking at the 1st of every month in-between}
+\title{Return start and end date, with all months in between}
 \usage{
 getMonths(start, end)
 }
 \description{
-Return start and end date, with all months in between
 From start to end, breaking at the 1st of every month in-between
 }
-

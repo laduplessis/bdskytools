@@ -20,4 +20,3 @@ quantilesOU(p, x0, t, mu, sigma, nu)
 \description{
 Calculate quantiles of OU process at different timepoints
 }
-

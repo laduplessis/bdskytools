@@ -15,4 +15,3 @@ Or a matrix, with each column being a  posterior sample}
 \description{
 Get HPDs and plot jelly beans
 }
-

@@ -14,11 +14,11 @@ gridSkyline(skyline, origin, times, reverse = FALSE)
 \item{times}{The regular timegrid to return the marginal posterior on}
 
 \item{reverse}{If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
-else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).}
+else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).
+Setting reverse == TRUE is equivalent to reversing the skyline and then running the function with reverse == FALSE}
 }
 \description{
 Assumes that generations are rows and skyline variables are columns (in order)
 Every generation has the skyline from times[1] to origin[i] (or origin[i] to times[1] if reverse=TRUE)
 Assumes that intervals in the skyline are equidistant
 }
-

@@ -27,4 +27,3 @@ plotRoundedBars(x, y1, y2, width, nv = 100, plotAlways = FALSE,
 \description{
 Plot a rounded bar (jelly bean)
 }
-

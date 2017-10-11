@@ -14,4 +14,3 @@ simulateBM(x0, t, k = 1)
 \description{
 Simulate BM trajectory
 }
-

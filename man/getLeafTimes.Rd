@@ -16,4 +16,3 @@ getLeafTimes(tree, reverse = FALSE, includeRoot = TRUE)
 \description{
 (based on getx() function by Tanja Stadler)
 }
-

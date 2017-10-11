@@ -20,4 +20,3 @@ Branching events labelled by a 1, leaves (sampling/death) by a 0
 \details{
 (based on getx() function by Tanja Stadler)
 }
-

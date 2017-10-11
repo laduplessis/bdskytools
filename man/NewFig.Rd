@@ -10,4 +10,3 @@ NewFig(figname = "fig.pdf", width = 3.42, aspectratio = 3/2,
 \description{
 Need to follow with dev.off()
 }
-

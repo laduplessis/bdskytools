@@ -31,4 +31,3 @@ Or a matrix, with each column being a  posterior sample}
 \description{
 Plot distributions using beans
 }
-

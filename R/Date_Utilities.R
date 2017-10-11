@@ -10,7 +10,7 @@ getDayDate <- function(date) {
 
   year <- floor(date)
   len  <- as.numeric(format.Date(as.Date(paste0(year,"-12-31"),),"%j"))
-  day  <- floor((date-year)*len)
+  day  <- round((date-year)*len)+1
   
   #return(as.Date(paste(year,day), format="%Y %j"))
   return(as.Date(paste0(year-1,"-12-31"))+day)
@@ -23,7 +23,7 @@ getYearDate <- function(date) {
   
   d    <- as.Date(date)
   year <- as.numeric(format.Date(d,"%Y"))
-  day  <- as.numeric(format.Date(d,"%j"))
+  day  <- as.numeric(format.Date(d,"%j"))-1
   len  <- as.numeric(format.Date(as.Date(paste0(year,"-12-31"),),"%j"))
   
   return (year + day/len)

@@ -144,7 +144,7 @@ plotSkylinePretty <- function(times, skyline_mat, type="smooth", traces=1000, co
   # Plot the basic skyline first
   plotSkyline(times, skyline_mat, type=type, traces=traces, col=col, fill=fill, lwd=lwd, lty=lty, axes=FALSE, xlab=NA, ylab=NA, xlims=xlims, ylims=ylims,  ...)
 
-  
+
   # General settings
   if (is.null(xticks)) xticks <- axTicks(1)
   if (is.null(yticks)) yticks <- axTicks(2)

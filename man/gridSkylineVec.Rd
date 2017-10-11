@@ -9,4 +9,3 @@ gridSkylineVec(skyline, origin, times, reverse = FALSE)
 \description{
 Version using apply, but it is slower for some enigmatic reason
 }
-

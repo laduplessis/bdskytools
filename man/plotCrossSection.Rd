@@ -14,4 +14,3 @@ plotCrossSection(par1, par2, lk, lk.upper = NULL, lk.lower = NULL,
 Plot cross section of the likelihood surface of par1, for given values of par2
 Logfile is a BEAST2 log file
 }
-

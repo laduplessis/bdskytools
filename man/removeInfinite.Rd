@@ -9,4 +9,3 @@ removeInfinite(data)
 \description{
 Remove all rows containing non-finite values
 }
-

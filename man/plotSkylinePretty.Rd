@@ -23,4 +23,3 @@ plotSkylinePretty(times, skyline_mat, type = "smooth", traces = 1000,
 When plotting the y-axis on the right need to ensure that the plot margins are big enough!
 See plotSkyline help for documentation on other parameters!
 }
-

@@ -11,4 +11,3 @@ paddedrange(y, pad = 0.1)
 Get range and pad by some percentage of the range on either side
 Good for plot limits
 }
-

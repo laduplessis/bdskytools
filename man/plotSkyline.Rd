@@ -37,4 +37,3 @@ the second last interval.}
 \description{
 Assume each column is a different time point (ncol(skylinemat) == length(times) must be fulfilled)
 }
-

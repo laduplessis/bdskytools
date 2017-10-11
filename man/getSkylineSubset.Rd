@@ -12,4 +12,3 @@ if par="R0" extract (R0s.1 R0s.2 R0s.3 etc.)
 \details{
 par needs to be at the start of the string
 }
-

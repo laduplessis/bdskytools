@@ -20,4 +20,3 @@ Calculate the branching times of a tree
  
 (based on getx() function by Tanja Stadler)
 }
-

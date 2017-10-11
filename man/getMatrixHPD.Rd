@@ -17,4 +17,3 @@ getMatrixHPD(datamat, margin = 2, alpha = 0.05)
 \description{
 Uses Chen and Shao algorithm as implemented in boa package.
 }
-

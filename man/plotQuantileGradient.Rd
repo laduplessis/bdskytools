@@ -16,4 +16,3 @@ plotQuantileGradient(t, quantiles, colidx)
 \description{
 Plot the quantiles for OU or BM process as a gradient across the timepoints
 }
-

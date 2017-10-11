@@ -17,4 +17,3 @@ c(lower, median, upper)
 \description{
 Uses Chen and Shao algorithm as implemented in boa package.
 }
-

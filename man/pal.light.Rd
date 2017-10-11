@@ -9,4 +9,3 @@ pal.light(col, alpha = 1)
 \description{
 Palette of diverging light colours (Paired palette from RColorBrewer)
 }
-

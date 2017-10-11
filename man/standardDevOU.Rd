@@ -20,4 +20,3 @@ standardDevOU(x0, t, mu, sigma, nu)
 \description{
 Standard deviation of OU process at times t starting at x0 at time 0
 }
-

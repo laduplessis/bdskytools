@@ -9,4 +9,3 @@ getPrior(distr, ...)
 \description{
 Return a function with parameters that can be evaluated using eval function
 }
-

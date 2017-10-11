@@ -9,4 +9,3 @@ timer(fun, ...)
 \description{
 (probably not very accurate)
 }
-

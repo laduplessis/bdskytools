@@ -93,6 +93,7 @@ readLogfile <- function(filename, burnin=0.1, maxsamples=-1) {
 #' @param times   The regular timegrid to return the marginal posterior on
 #' @param reverse If FALSE assumes that skyline[,1] is the oldest interval (skyline is forward in time - oldest to newest), 
 #'                else if TRUE assume skyline[,1] is the most recent interval (skyline is backward in time - newest to oldest).
+#'                Setting reverse == TRUE is equivalent to reversing the skyline and then running the function with reverse == FALSE
 #' 
 #' @export
 gridSkyline <- function(skyline, origin, times, reverse=FALSE) {
@@ -116,7 +117,6 @@ gridSkyline <- function(skyline, origin, times, reverse=FALSE) {
     skyline_gridded[i,] <- skyline_matrix[i,getIndices(i)]
   }
   
-
   return (skyline_gridded)
 }
 

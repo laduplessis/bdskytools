@@ -14,4 +14,3 @@ quantilesBM(p, x0, t)
 \description{
 Calculate quantiles of BM process at different timepoints
 }
-

@@ -16,4 +16,3 @@ readLogfile(filename, burnin = 0.1, maxsamples = -1)
 \description{
 Read in BEAST2 logfile
 }
-

@@ -2,8 +2,7 @@
 % Please edit documentation in R/Date_Utilities.R
 \name{getWeeks}
 \alias{getWeeks}
-\title{From the first week BEFORE start up to end (strict)
-Weeks start on Sunday}
+\title{From the first week BEFORE start up to end (strict)}
 \usage{
 getWeeks(start, end, inclusive = TRUE, strictend = FALSE)
 }
@@ -13,7 +12,5 @@ getWeeks(start, end, inclusive = TRUE, strictend = FALSE)
 \item{inclusive:}{If TRUE then the weeks start and end m}
 }
 \description{
-From the first week BEFORE start up to end (strict)
 Weeks start on Sunday
 }
-

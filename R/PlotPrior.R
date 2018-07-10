@@ -89,6 +89,16 @@ plotPrior <- function(priorfun="norm", prior_args=list(), col=pal.dark(cblue), f
 }
 
 
+# Paratially inspired by blog post from Jordan Douglas (https://www.beast2.org/2017/05/05/using-r-to-estimate-probability-distribution-parameters-using-quantiles-or-hpd-intervals/)
+optimPrior <- function(priorfun="norm", prior_probs=c(0.025, 0.5, 0.975), prior_quantiles=c(-1.959964, 0, 1.959964), prior_init=c(1,1)) {
+  
+  pfun     <- function(x,params) do.call(sprintf("p%s",priorfun), c(list(x), params))
+  errorfun <- function(params) sum((sapply(prior_quantiles,pfun,params)-prior_probs)^2)
+  result   <- optim(prior_init, errorfun)
+  
+  return(result)
+}
+
 
 #' Return a function with parameters that can be evaluated using eval function
 #' 

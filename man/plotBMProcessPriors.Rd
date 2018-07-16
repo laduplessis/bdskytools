@@ -2,10 +2,14 @@
 % Please edit documentation in R/PlotPrior.R
 \name{plotBMProcessPriors}
 \alias{plotBMProcessPriors}
-\title{Parameters may be a prior or a constant}
+\title{This function does not really plot the true quantiles - quantiles of quantiles across sims
+(function should be removed)}
 \usage{
 plotBMProcessPriors(x0_prior, t, ...)
 }
 \description{
+Parameters may be a prior or a constant
+}
+\details{
 Use getPrior to quote the prior function to be passed with parameters
 }

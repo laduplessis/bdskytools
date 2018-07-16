@@ -2,11 +2,15 @@
 % Please edit documentation in R/PlotPrior.R
 \name{plotOUProcessPriors}
 \alias{plotOUProcessPriors}
-\title{Parameters may be a prior or a constant
-Use getPrior to quote the prior function to be passed with parameters}
+\title{This function does not really plot the true quantiles - quantiles of quantiles across sims
+(function should be removed)}
 \usage{
 plotOUProcessPriors(x0_prior, t, mu_prior, sigma_prior, nu_prior, ...)
 }
 \description{
+Parameters may be a prior or a constant
+Use getPrior to quote the prior function to be passed with parameters
+}
+\details{
 Should probably rewrite this using do.call()
 }

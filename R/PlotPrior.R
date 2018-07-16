@@ -125,6 +125,9 @@ plotQuantileGradient <- function(t, quantiles, colidx) {
   } 
 }
 
+#' This function does not really plot the true quantiles - quantiles of quantiles across sims
+#' (function should be removed)
+#' 
 #' Parameters may be a prior or a constant
 #' Use getPrior to quote the prior function to be passed with parameters
 #' 
@@ -132,6 +135,8 @@ plotQuantileGradient <- function(t, quantiles, colidx) {
 #' 
 #' @export
 plotOUProcessPriors <- function(x0_prior, t, mu_prior, sigma_prior, nu_prior, ...) {
+  
+  warning("Be careful! This function does not do what it claims to...")
   
   # Number of traces to simulate
   n <- 10000
@@ -163,6 +168,9 @@ plotOUProcessPriors <- function(x0_prior, t, mu_prior, sigma_prior, nu_prior, ..
 }
 
 
+#' This function does not really plot the true quantiles - quantiles of quantiles across sims
+#' (function should be removed)
+#' 
 #' Parameters may be a prior or a constant
 #' 
 #' Use getPrior to quote the prior function to be passed with parameters
@@ -170,6 +178,9 @@ plotOUProcessPriors <- function(x0_prior, t, mu_prior, sigma_prior, nu_prior, ..
 #' 
 #' @export
 plotBMProcessPriors <- function(x0_prior, t, ...) {
+  
+  warning("Be careful! This function does not do what it claims to...")
+  
   
   # Number of traces to simulate
   n <- 10000

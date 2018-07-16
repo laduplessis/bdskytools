@@ -2,7 +2,7 @@
 % Please edit documentation in R/OUProcess.R
 \name{simulateDiscreteOU}
 \alias{simulateDiscreteOU}
-\title{Simulate OU trajectory using the Euler-Maruyama method (inaccurate)}
+\title{Functions for simulating Ornstein-Uhlenbeck processes and calculating densities and likelihoods}
 \usage{
 simulateDiscreteOU(x0, t, mu, sigma, nu)
 }
@@ -19,4 +19,7 @@ simulateDiscreteOU(x0, t, mu, sigma, nu)
 }
 \description{
 Simulate OU trajectory using the Euler-Maruyama method (inaccurate)
+}
+\details{
+Function assumes equidistant time intervals
 }

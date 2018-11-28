@@ -74,6 +74,13 @@ nu    <- 2
 l     <- logLikOU(x,t,mu,sigma,nu, removeconstant = TRUE)
 print(paste0("{",paste(x,collapse=","),"}  {",paste(t,collapse=","),"}  ",l))
 
+x     <- c(10,9,8,7,6,5,5,5,5,6,5)
+t     <- seq(from=0, to=10, by=1)
+x0    <- 10
+mu    <- 5
+sigma <- 1
+nu    <- 2
+l     <- logLikOU(x,t,mu,sigma,nu, removeconstant = TRUE)
+print(paste0("{",paste(x,collapse=","),"}  {",paste(t,collapse=","),"}  ",l))
 
 
-# 4) Log-likelihood of a trajectory with priors

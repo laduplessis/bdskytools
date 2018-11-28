@@ -5,12 +5,12 @@
 \title{Plot a pretty skyline. Contains default options for drawing axes to the plot}
 \usage{
 plotSkylinePretty(times, skyline_mat, type = "smooth", traces = 1000,
-  col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), col.axis = NA,
-  lwd = 1, lty = 1, xaxis = TRUE, yaxis = TRUE, xlab = "",
-  ylab = "", xline = 1, yline = 1, xticks = NULL, yticks = NULL,
-  xticklabels = NULL, xlims = NULL, ylims = NULL, xgrid = FALSE,
-  ygrid = FALSE, gridcol = pal.light(cgray), cex.label = 1.4,
-  cex.axis = 1, axispadding = 0, side = 2, ...)
+  col = pal.dark(cblack), fill = pal.dark(cgray, 0.25),
+  col.axis = NA, lwd = 1, lty = 1, xaxis = TRUE, yaxis = TRUE,
+  xlab = "", ylab = "", xline = 1, yline = 1, xticks = NULL,
+  yticks = NULL, xticklabels = NULL, xlims = NULL, ylims = NULL,
+  xgrid = FALSE, ygrid = FALSE, gridcol = pal.light(cgray),
+  cex.label = 1.4, cex.axis = 1, axispadding = 0, side = 2, ...)
 }
 \arguments{
 \item{xline}{Line to draw x-axis label on}

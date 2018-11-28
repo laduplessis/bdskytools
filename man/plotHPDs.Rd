@@ -7,12 +7,12 @@
 plotHPDs(data, type = "beans", hpdlines = c(0.05, 0.5),
   linewidths = c(0.75, 1), maxwidth = 0.5, hpdonly = TRUE,
   showlimits = FALSE, plotmedian = TRUE, plothalf = FALSE,
-  col = pal.dark(cblack), fill = pal.dark(cgray, 0.25), col.axis = NA,
-  lwd = 1, add = FALSE, new = TRUE, xaxis = TRUE, yaxis = TRUE,
-  xlab = "", ylab = "", xline = 1, yline = 1, xticks = NULL,
-  yticks = NULL, xticklabels = NULL, ygrid = FALSE, xgrid = FALSE,
-  gridcol = pal.light(cgray), ylims = NULL, cex.label = 1.4,
-  cex.axis = 1, axispadding = 0, side = 2, ...)
+  col = pal.dark(cblack), fill = pal.dark(cgray, 0.25),
+  col.axis = NA, lwd = 1, add = FALSE, new = TRUE, xaxis = TRUE,
+  yaxis = TRUE, xlab = "", ylab = "", xline = 1, yline = 1,
+  xticks = NULL, yticks = NULL, xticklabels = NULL, ygrid = FALSE,
+  xgrid = FALSE, gridcol = pal.light(cgray), ylims = NULL,
+  cex.label = 1.4, cex.axis = 1, axispadding = 0, side = 2, ...)
 }
 \arguments{
 \item{data}{List with each element being a vector that represents a posterior sample

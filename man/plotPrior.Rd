@@ -4,11 +4,11 @@
 \alias{plotPrior}
 \title{Plot a parametric distribution where the distribution is already available in R}
 \usage{
-plotPrior(priorfun = "norm", prior_args = list(), col = pal.dark(cblue),
-  fill = pal.dark(cblue, 0.25), ylab = "Density", xlab = "x",
-  plotquantile = TRUE, grid = TRUE, positive = TRUE, invert = FALSE,
-  meaninrealspace = FALSE, scaling = 1, add = FALSE, xlims = NULL,
-  ylims = NULL, ...)
+plotPrior(priorfun = "norm", prior_args = list(),
+  col = pal.dark(cblue), fill = pal.dark(cblue, 0.25),
+  ylab = "Density", xlab = "x", plotquantile = TRUE, grid = TRUE,
+  positive = TRUE, invert = FALSE, meaninrealspace = FALSE,
+  scaling = 1, add = FALSE, xlims = NULL, ylims = NULL, ...)
 }
 \arguments{
 \item{priorfun}{Family of distributions e.g. norm or beta}

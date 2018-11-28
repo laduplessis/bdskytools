@@ -2,15 +2,15 @@
 % Please edit documentation in R/OUProcessPlot.R
 \name{plotOUProcessHPD}
 \alias{plotOUProcessHPD}
-\title{Functions for plotting OU processes}
+\title{Plot expected 95% quantiles (0.025 and 0.975) and median of OU-process, 
+conditioning on values of x0, mu, sigma, nu}
 \usage{
 plotOUProcessHPD(x0, t, mu, sigma, nu, nGrad = 101, plotGrad = TRUE,
   ylim = NULL, ...)
 }
 \description{
-Plot expected 95% quantiles (0.025 and 0.975) and median of OU-process, 
-conditioning on values of x0, mu, sigma, nu
+Can also plot a gradient of quantiles (by default plots percentiles - n=101)
 }
 \details{
-Can also plot a gradient of quantiles (by default plots percentiles - n=101)
+TODO: Name is misleading, quantiles are NOT HPDs.
 }

@@ -8,7 +8,8 @@ Logfile is a BEAST2 log file}
 plotCrossSection(par1, par2, lk, lk.upper = NULL, lk.lower = NULL,
   par1.truth = NA, par2.truth = NA, col = pal.dark(cblue),
   fill = pal.dark(cblue, 0.5), xlims = NULL, ylims = NULL,
-  par1.label = NA, par2.label = NA, lk.label = NA, sections = -1, ...)
+  par1.label = NA, par2.label = NA, lk.label = NA, sections = -1,
+  ...)
 }
 \description{
 Plot cross section of the likelihood surface of par1, for given values of par2

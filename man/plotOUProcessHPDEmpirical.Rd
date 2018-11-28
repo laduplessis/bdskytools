@@ -2,7 +2,7 @@
 % Please edit documentation in R/OUProcessPlot.R
 \name{plotOUProcessHPDEmpirical}
 \alias{plotOUProcessHPDEmpirical}
-\title{Plot empirical 95% quantiles (0.025 and 0.975) and median of OU-process, 
+\title{Plot empirical 95% HPD interval and median of OU-process, 
 from simulating nTraj replicates, which can also be plotted}
 \usage{
 plotOUProcessHPDEmpirical(x0_prior, t, mu_prior, sigma_prior, nu_prior,

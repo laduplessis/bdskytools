@@ -110,6 +110,7 @@ plotOUDensity <- function(xrange, dt, x0, mu, sigma, nu, col=pal.dark(cblue), co
     abline(v=OUlimits[2], col=col, lwd=2, lty=2)
   }
   
+  return(c(x0=x0, shift=(OUlimits[2]-x0), width=unname(OUlimits[3]-OUlimits[1]), centering=(OUlimits[2]-OUlimits[1])/(OUlimits[3]-OUlimits[1])))
 }
 
 
@@ -129,6 +130,7 @@ plotOUDensityEmpirical <- function(xrange, dt, x0_prior, mu_prior, sigma_prior, 
   X <- matrix(0, nrow=nTraj, ncol=length(t))
   
   # Do simulations and plot trajectories
+  x0list <- c()
   for (i in 1:nTraj) {
     x0    <- eval(x0_prior)
     mu    <- eval(mu_prior)
@@ -137,6 +139,8 @@ plotOUDensityEmpirical <- function(xrange, dt, x0_prior, mu_prior, sigma_prior, 
     
     # Simulate trajectory
     X[i,] <- simulateOU(x0, t, mu, sigma, nu)
+    
+    x0list <- c(x0list, x0)
   }
   # Empirical 95% HPD and median
   OUlimits  <- getHPD(X[,ncol(X)])
@@ -160,6 +164,8 @@ plotOUDensityEmpirical <- function(xrange, dt, x0_prior, mu_prior, sigma_prior, 
     abline(v=OUlimits[2], col=col, lwd=2, lty=2)
   }
   
+  
+  return(c(x0=median(x0list), shift=(OUlimits[2]-median(x0list)), width=unname(OUlimits[3]-OUlimits[1]), centering=(OUlimits[2]-OUlimits[1])/(OUlimits[3]-OUlimits[1])))
 }
 
 
@@ -180,14 +186,17 @@ plotOUProcessFlexibility <- function(xlim, dt, x0, mu, sigma, nu, nSteps=100) {
   
   layout(matrix(c(1:n,rep(n+1,n)),byrow=TRUE, nrow=2))
   for (i in 1:n) {
-    plotOUProcessHPD(x0[i], t, mu, sigma, nu, ylim=range(x), xlab="t",ylab="x",main=paste("x0 =",x0[i]))      
+    plotOUProcessHPD(x0[i], t, mu, sigma, nu, ylim=range(x), xlab="t",ylab="x",main=paste("x0 =",x0[i]))
   }
   
+  result <- c()
   for (i in 1:n) {
-    plotOUDensity(x, dt, x0[i], mu, sigma, nu, col=cols[i], new=ifelse(i==1,TRUE,FALSE),xaxs='i', yaxs='i', xlab='x', ylab="", bty='n')
+    result <- rbind(result, plotOUDensity(x, dt, x0[i], mu, sigma, nu, col=cols[i], new=ifelse(i==1,TRUE,FALSE),xaxs='i', yaxs='i', xlab='x', ylab="", bty='n'))
   } 
   abline(v=mu,col='red',lty=3, lwd=2)
   legend('topright',col=cols, pch=16, bty='n', legend=paste("x0 =",x0), cex=1.25)
+  
+  return(result)
 }
 
 
@@ -214,8 +223,9 @@ plotOUProcessFlexibilityEmpirical <- function(xlim, dt, x0, mu_p, sigma_p, nu_p,
     plotOUProcessHPDEmpirical(x0[i], t, mu_p, sigma_p, nu_p, nTraj=1000, plotTraj=TRUE, ylim=range(x), xlab="t",ylab="x", main=paste("x0 =",x0[i]))
   }
   
+  result <- c()
   for (i in 1:n) {
-    plotOUDensityEmpirical(x, dt, x0[i], mu_p, sigma_p, nu_p, col=cols[i], new=ifelse(i==1,TRUE,FALSE),xaxs='i', yaxs='i', xlab='x', ylab="", bty='n')
+    result <- rbind(result, plotOUDensityEmpirical(x, dt, x0[i], mu_p, sigma_p, nu_p, col=cols[i], new=ifelse(i==1,TRUE,FALSE),xaxs='i', yaxs='i', xlab='x', ylab="", bty='n'))
   } 
   
   mu <- c()
@@ -225,6 +235,8 @@ plotOUProcessFlexibilityEmpirical <- function(xlim, dt, x0, mu_p, sigma_p, nu_p,
   #print(length(mu))
   abline(v=median(mu),col='red',lty=3, lwd=2)
   legend('topright',col=cols, pch=16, bty='n', legend=paste("x0 =",x0), cex=1.25)
+  
+  return(result)
 }
 
 
